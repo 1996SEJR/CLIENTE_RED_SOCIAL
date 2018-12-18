@@ -1,0 +1,52 @@
+
+<!--evento sended video 113-->
+<sidebar (sended)="refreshPublications($event)"></sidebar>
+
+<div class="col-lg-8">
+    <h1 class="h1-strong">
+        <button class="btn btn-default btn-sm" style="width: 100%" (click)="refreshPublications($event)">Nuevas publicaciones</button>
+    </h1>
+    
+    <div id="publication">
+        <div *ngFor="let publication of publications" class="item-publication">
+            <div class="panel panel-default">
+                <div class="panel-body">
+    
+                    <div class="image-user pull-left">
+                            <a href="#">
+                                <img src="{{url + 'get-image-user/' + publication.user.image }}" *ngIf="publication.user.image">
+                                <img src="assets/user.png" class="avatar-default" *ngIf="!publication.user.image">
+                            </a>
+                        </div>
+                        
+                    <div>
+                        <span class="user-name">
+                            <strong>
+                                {{publication.user.name}} {{publication.user.username}}
+                            </strong>
+                        </span>
+                        &nbsp; . &nbsp;
+                        <span class="date">
+                            {{ (publication.created_at | amFromUnix) | amLocale: "es" | amTimeAgo }}
+                        </span>
+    
+                    </div>
+                    
+                    <div class="publication-text pull-left">
+                        <h4>{{publication.text}} </h4>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-12 text-center">
+        <p>
+            <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+                Ver más publicaciones
+            </button>
+        </p>
+    </div>
+</div>
+<div class="clearfix"> </div>

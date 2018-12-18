@@ -1,0 +1,99 @@
+
+<sidebar></sidebar>
+
+<div class="col-lg-8">
+    <h1 class="h1-strong">
+        {{title}}
+    </h1> 
+    <div id="data-profile" *ngIf="user">
+        <div class="avatar pull-left">
+            <img src="{{url + 'get-image-user/' + user.image }}" *ngIf="user.image">
+            <img src="assets/user.png" *ngIf="!user.image">
+        </div>
+
+        <div class="user-name pull-left">
+
+            <div class="">
+                <span class="name">{{user.name + ' ' + user.username }} </span>
+                
+                <span class="label label-default" *ngIf="followed">
+                    Te sigue
+                </span>
+                <div class="clearfix"></div>
+                <span class="nick">{{ user.nick }}</span>     
+                
+                <div class="follow" *ngIf="identity._id != user._id ">
+                    <button class="btn btn-success" *ngIf="!following" (click)="followUser(user._id)">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                        Seguir                        
+                    </button>
+    
+                    <button 
+                     class="btn btn-primary" 
+                     *ngIf="following" 
+                     (click)="unfollowUser(user._id)"
+                     (mouseenter) = "mouseEnter(user._id)"
+                     (mouseleave) = "mouseLeave()"
+                     [class.btn-danger] ="user._id == followUserOver" 
+                     >
+                     
+                        <!--ELSE FOLLOWING ENLACE CON EL NG-TEMPLATE #FOLLOWING-->
+                        <span *ngIf="user._id == followUserOver; else following">
+                            <span class="glyphicon glyphicon-minus-sign"></span>
+                            <!--EL TEXTO DEJAR DE SEGUIR SE MOSTRARÁ CUANDO EL MOUSE ESTÉ ENCIMA DEL BOTÓN-->
+                            Dejar de seguir
+                        </span>
+                        <ng-template #following >
+                            <span class="glyphicon glyphicon-ok-sign"></span>
+                            Siguiendo
+                        </ng-template>
+                    </button>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+        <div class="stats " *ngIf="stats">
+            <div class="following-data">
+                <a href="#">
+                    <span class="label-stats">
+                        Siguiendo
+                    </span>
+                    <span class="number-stats">
+                        {{stats.following}}
+                    </span>
+                </a>
+            </div>
+    
+            <div class="following-data">
+                <a href="#">
+                    <span class="label-stats">
+                        Seguidores
+                    </span>
+                    <span class="number-stats">
+                        {{stats.followed}}
+                    </span>
+                </a>
+            </div>
+    
+            <div class="following-data">
+                <a href="#">
+                    <span class="label-stats">
+                        Publicaciones
+                    </span>
+                    <span class="number-stats">
+                        {{stats.publications}}
+                    </span>
+                </a>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-lg-12 publications" *ngIf="user">
+            <publications [user]="user._id"></publications>
+        </div>
+
+    </div>
+  
+</div>
+

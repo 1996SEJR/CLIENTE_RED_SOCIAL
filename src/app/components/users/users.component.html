@@ -1,0 +1,86 @@
+<sidebar></sidebar>
+
+<div class="col-lg-8">
+    <h1 class="h1-strong">{{title}}</h1>
+
+    <div class="people">
+
+        <!-- LISTAR USUARIOS -->
+        <div *ngFor="let user of users"  class="item-user">
+            <div *ngIf="user._id != identity._id">
+                    <div class="panel panel-default">
+                            <div class="panel-body">
+            
+                                <div class="image-user pull-left">
+                                    <a href="#">
+                                        <img src="{{url + 'get-image-user/' +user.image }}" *ngIf="user.image">
+                                        <img src="assets/user.png" class="avatar-default" *ngIf="!user.image">
+                                    </a>
+                                </div>
+                                <div class="user-name pull-left">
+                                    <p class="name-username">
+                                        <a [routerLink]="['/perfil', user._id]">
+                                            {{user.name + ' ' + user.username}}
+                                        </a>
+                                    </p>
+                                    <p class="nickname">
+                                        {{user.nick}}
+                                        {{user.email}} 
+                                    </p>
+                                    
+                                </div>
+            
+                                <!-- SEGUIR O DEJAR DE SEGUIR-->
+                                <div class="pull-right">
+                                    <button class="btn btn-success" 
+                                    *ngIf="follows.indexOf(user._id) < 0"
+                                    (click)="followUser(user._id)">
+                                        <span class="glyphicon glyphicon-plus-sign"></span>
+                                        Seguir
+                                    </button>
+            
+                                    <!--EL COLOR ROJO SE MOSTRARÁ CUANDO EL MOUSE ESTÉ ENCIMA DEL BOTÓN-->
+                                    <!--EL COLOR AZUL SE MOSTRARÁ CUANDO EL MOUSE NO ESTÉ ENCIMA DEL BOTÓN-->
+                                    <button class="btn btn-primary" 
+                                    *ngIf="follows.indexOf(user._id) >= 0"
+                                    (click)="unfollowUser(user._id)"
+                                    (mouseenter)="mouseEnter(user._id)"
+                                    (mouseleave)="mouseLeave()"  
+                                    
+                                    
+                                    [class.btn-danger] ="user._id == followUserOver"                   
+                                    >                            
+                                        <!--ELSE FOLLOWING ENLACE CON EL NG-TEMPLATE #FOLLOWING-->
+                                        <span *ngIf="user._id == followUserOver; else following">
+                                            <span class="glyphicon glyphicon-minus-sign"></span>
+                                            <!--EL TEXTO DEJAR DE SEGUIR SE MOSTRARÁ CUANDO EL MOUSE ESTÉ ENCIMA DEL BOTÓN-->
+                                            Dejar de seguir
+                                        </span>
+                                        <ng-template #following >
+                                            <span class="glyphicon glyphicon-ok-sign"></span>
+                                            Siguiendo
+                                        </ng-template>
+                                    </button>
+                                </div>
+                            </div>
+                           
+                        </div>
+            </div>
+
+        </div>
+
+        <!-- PAGINACION -->
+        <ul class="pagination pull-right">
+            <li *ngIf="page > 1">
+                <a [routerLink]="['/gente', prev_page]">Anterior</a>
+            </li>
+            <li *ngIf="pages != page">
+                <a [routerLink]="['/gente', next_page]">Siguiente</a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+
+<div class="clearfix"> </div>

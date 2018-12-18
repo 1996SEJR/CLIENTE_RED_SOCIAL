@@ -1,0 +1,77 @@
+<div class="col-lg-6 col-lg-offset-3">
+
+    <div class="col-lg-12 text-center">
+            <h1 class="h1-strong">{{title}}</h1>
+
+            <div class="alert alert-success" *ngIf="status == 'success'">
+                Se ha actualizado tus datos con éxito
+            </div>
+        
+            <div class="alert alert-danger" *ngIf="status == 'danger'">
+                No se han podido actualizar tus datos !!!
+            </div>
+        </div>
+    
+
+
+    <!--#registerForm: nombre del formulario -->
+    <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
+        <!--campos-->
+        <p class="col-lg-6"> 
+            <label>Nombre</label>
+            <input type="text" name="name" #nombre="ngModel" [(ngModel)]="user.name" class="form-control" required>
+            <span *ngIf="!nombre.valid && nombre.touched" >
+                <p class="text-danger">
+                    <strong> El nombre es obligatorio</strong>
+                </p>
+            </span>
+        </p>
+        
+        <p class="col-lg-6">
+            <label>Apellido</label>
+            <input type="text" name="username" #apellidos="ngModel" [(ngModel)]="user.username" class="form-control" required>
+            <span *ngIf="!apellidos.valid && apellidos.touched" >
+                <p class="text-danger">
+                    <strong> El apellido es obligatorio</strong>
+                </p>
+            </span>
+        </p>
+
+        <p class="col-lg-6">
+            <label>Apodo</label>
+            <input type="text" name="nick" #apodo="ngModel" [(ngModel)]="user.nick" class="form-control" required>
+            <span *ngIf="!apodo.valid && apodo.touched" >
+                <p class="text-danger">
+                    <strong> El apodo es obligatorio</strong>
+                </p>
+            </span>    
+        </p>
+
+        <p class="col-lg-6">
+            <label>Email</label>
+            <input type="email" name="email" #correo="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <span *ngIf="!correo.valid && correo.touched" >
+                <p class="text-danger">
+                    <strong> El correo es incorrecto</strong>
+                </p>
+            </span>
+        </p>
+
+        <div class="edit-user col-lg-12">
+            <div *ngIf="user.image" class="image-user">
+                <img src="{{ url + 'get-image-user/' + user.image }}">
+            </div>
+        </div>
+        
+
+        <p  class="col-lg-12" >
+            <label>Subir avatar</label>
+            <input type="file" name="imagen" placeholder="Subir imagen" (change)="fileChangeEvent($event)">
+        </p>
+
+        <p class="col-lg-12" style="text-align: center">
+            <input type="submit" value="{{title}}" class="btn btn-warning"  [disabled]="!userEditForm.form.valid" >            
+        </p>
+        
+    </form>
+</div>
