@@ -23,6 +23,7 @@ export class TimelineComponent implements OnInit {
     public total;
     public pages;
     public publications: Publication[];
+    public showImage;
     //public status:string;
 
     public constructor(
@@ -107,5 +108,9 @@ export class TimelineComponent implements OnInit {
     refreshPublications(event){
         this.getPublications(1);
         //console.log(event);
+    }
+
+    showThisImage(id){
+        this.showImage = id;
     }
 }

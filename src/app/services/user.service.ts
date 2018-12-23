@@ -65,7 +65,7 @@ export class UserService{
 
     getStats(){
         let stats = JSON.parse(localStorage.getItem('stats'));
-        console.log(stats);
+        //console.log(stats);
         
         if(stats != "undefined"){
             this.stats = stats;

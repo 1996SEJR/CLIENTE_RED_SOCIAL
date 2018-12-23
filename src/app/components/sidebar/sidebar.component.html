@@ -59,16 +59,17 @@
     
     <!--FORMULARIO DE PUBLICACIONES-->
     <div id="new-publication" class="col-lg-12 panel panel-default pull-right ">
-    
-        <div class="alert alert-success" *ngIf="status == 'success'">
-            Publicación enviada correctamente
+        <div class="col-lg-12">
+            <div class="alert alert-success" *ngIf="status == 'success'">
+                Publicación enviada correctamente
+            </div>
+        
+            <div class="alert alert-danger" *ngIf="status == 'error'">
+                Publicación no enviada
+            </div>
         </div>
-    
-        <div class="alert alert-danger" *ngIf="status == 'error'">
-            Publicación no enviada
-        </div>
-    
-        <form #newPublicationForm="ngForm" (ngSubmit)="onSubmit(newPublicationForm); sendPublication($event)" class="col-lg-10" >
+
+        <form #newPublicationForm="ngForm" (ngSubmit)="onSubmit(newPublicationForm); sendPublication($event)" class="col-lg-12" >
             <p>
                 <label>¿Qué estas pensando hoy?</label>
                 <textarea name="text" #texto="ngModel" [(ngModel)]="publication.text" class="form-control" required></textarea>
@@ -79,7 +80,7 @@
     
             <p>
                 <label>Sube alguna imagen</label>
-                <input type="file" placeholder="Subir imagen">
+                <input type="file" placeholder="Subir imagen" (change)="fileChangeEvent($event)">
             </p>
     
             <!-- LANZAR EVENTO sendPublication video 113 -->

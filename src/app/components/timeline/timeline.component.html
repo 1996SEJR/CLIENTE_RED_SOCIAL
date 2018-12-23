@@ -20,11 +20,11 @@
                         </div>
                         
                     <div>
-                        <span class="user-name">
+                        <a [routerLink]="['/perfil', publication.user._id]" class="user-name">
                             <strong>
                                 {{publication.user.name}} {{publication.user.username}}
                             </strong>
-                        </span>
+                        </a>
                         &nbsp; . &nbsp;
                         <span class="date">
                             {{ (publication.created_at | amFromUnix) | amLocale: "es" | amTimeAgo }}
@@ -34,6 +34,11 @@
                     
                     <div class="publication-text pull-left">
                         <h4>{{publication.text}} </h4>
+                    </div>
+
+                    <!--video 125 botones para mostrar las imagenes -->
+                    <div class="col-lg-12" *ngIf="publication.file != 'null' ">
+                        <img src="{{ url + 'get-image-pub/' + publication.file }}" class="col-lg-12">
                     </div>
                 </div>
     
