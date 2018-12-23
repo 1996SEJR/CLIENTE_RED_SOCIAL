@@ -23,7 +23,6 @@ export class PublicationsComponent implements OnInit {
     public total;
     public pages;
     public publications: Publication[];
-    public estado_publicaciones = 0;
     @Input() user:string; //esta propiedad se llena con un valor de afuera
     //public status:string;
 
@@ -63,14 +62,13 @@ export class PublicationsComponent implements OnInit {
 
                         //para poder usar jquery instalar
                         //npm install --save @types/jquery
-                        $("html, body").animate({ scrollTop: $('body').prop("scrollHeight")}, 500);
+                        $("html, body").animate({ scrollTop: $('html').prop("scrollHeight")}, 500);
                         /*console.log('array a')
                         console.log(arrayA)
                         console.log('publications')
                         console.log(this.publications)*/
 
                     }
-                    this.estado_publicaciones = this.publications.length;
 
                     //si pagina actual es mayor a la pagina que tengo guardada
                     /*if(page > this.pages){
@@ -95,20 +93,15 @@ export class PublicationsComponent implements OnInit {
         );
     }
 
-    public noMore = false;
+    public noMore = false; //esta propiedad se la ocupa en publications.component.html para mostrar el botón de ver publicaciones
     viewMore(){
-        //console.log(this.publications.length)
-        //console.log(this.total)
-        if( this.publications.length == this.total ){
+        this.page += 1;
+        
+        if( this.page == this.pages ){
             this.noMore = true;
-        }else{
-            this.page += 1;
-            //console.log('page')
-            //console.log(this.page)
         }
-        if(!this.noMore){
-            this.getPublications(this.user, this.page, true);
-        }
+        
+        this.getPublications(this.user, this.page, true);
         
     }
 }

@@ -61,7 +61,7 @@ export class TimelineComponent implements OnInit {
 
                         //para poder usar jquery instalar
                         //npm install --save @types/jquery
-                        $("html, body").animate({ scrollTop: $('body').prop("scrollHeight")}, 500);
+                        $("html, body").animate({ scrollTop: $('html').prop("scrollHeight")}, 500);
                         /*console.log('array a')
                         console.log(arrayA)
                         console.log('publications')
@@ -92,20 +92,16 @@ export class TimelineComponent implements OnInit {
         );
     }
 
-    public noMore = false;
+    public noMore = false; //esta propiedad se la ocupa en timeline.component.html para mostrar el botón de ver publicaciones
     viewMore(){
         //console.log(this.publications.length)
         //console.log(this.total)
-        if( this.publications.length == this.total ){
+        this.page += 1;
+        if( this.page == this.pages ){
             this.noMore = true;
-        }else{
-            this.page += 1;
-            //console.log('page')
-            //console.log(this.page)
         }
-        if(!this.noMore){
-            this.getPublications(this.page, true);
-        }
+
+        this.getPublications(this.page, true);
     }
 
     refreshPublications(event){
