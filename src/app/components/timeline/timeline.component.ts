@@ -105,12 +105,23 @@ export class TimelineComponent implements OnInit {
         this.getPublications(this.page, true);
     }
 
-    refreshPublications(event){
+    refreshPublications(event = null){
         this.getPublications(1);
         //console.log(event);
     }
 
     showThisImage(id){
         this.showImage = id;
+    }
+
+    deletePublication(id){
+        this._publicationService.deletePublication(this.token, id).subscribe(
+            response =>{
+                this.refreshPublications();
+            },
+            error =>{
+                console.log(<any>error);
+            }
+        )
     }
 }

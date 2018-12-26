@@ -45,27 +45,28 @@ export class SidebarComponent implements OnInit {
         console.log('componente sidebar cargado con éxito');
     }
 
-    onSubmit(form){
+    onSubmit(form, $event){
         //console.log(this.publication);
         this._publicationService.addPublication(this.token, this.publication).subscribe(
             response => {
                 if(response.publication){
                     //this.publication = response.publication;
 
-                    if(this.filesToUpload){
-                        console.log('hay archivo')
+                    if(this.filesToUpload && this.filesToUpload.length){
+                        //console.log('hay archivo')
                         //subir imagen
                         //el parametro image debe estar relacionado con el parametro que está en el api de publicaciones
                         this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image').then((result:any)=>{
                             this.publication.file = result.image;
-
-                            
                         });
                     }
 
                     this.status = "success";
+                    
                     form.resetForm(); // or form.reset();
+                    this.sended.emit({send: 'true'});//se emite el evento
                     this._router.navigate(['/timeline']);
+                    
                     
                 }else{
                     this.status = 'error';
