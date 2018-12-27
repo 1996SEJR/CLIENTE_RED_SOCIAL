@@ -34,7 +34,7 @@
             </div>
     
             <div class="following-data">
-                <a href="#">
+                <a [routerLink]="['/seguidores', identity._id, 1]">
                     <span class="label-stats">
                         Seguidores
                     </span>
@@ -45,7 +45,7 @@
             </div>
     
             <div class="following-data">
-                <a href="#">
+                <a [routerLink]="['/perfil', identity._id]">
                     <span class="label-stats">
                         Publicaciones
                     </span>

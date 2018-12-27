@@ -15,23 +15,26 @@ export class UploadService{
             var formData: any = new FormData();//similar un formulario clásico
             var xhr = new XMLHttpRequest(); //variable con un objeto para hacer peticiones ajax
 
-            for(var i = 0; i<files.length; i++){
-                formData.append(name, files[i], files[i].name);
-            }           
+            if(files){
+                for(var i = 0; i<files.length; i++){
+                    formData.append(name, files[i], files[i].name);
+                }   
 
-            xhr.onreadystatechange = function(){ 
-                if(xhr.readyState == 4){
-                    if(xhr.status == 200){
-                        resolve(JSON.parse(xhr.response)); //ejecutar la petición correctamente
-                    }else{
-                        reject(xhr.response); //no dejar hacer la petición ajax
+                xhr.onreadystatechange = function(){ 
+                    if(xhr.readyState == 4){
+                        if(xhr.status == 200){
+                            resolve(JSON.parse(xhr.response)); //ejecutar la petición correctamente
+                        }else{
+                            reject(xhr.response); //no dejar hacer la petición ajax
+                        }
                     }
                 }
+    
+                xhr.open('POST', url, true); //hacer la petición ajax
+                xhr.setRequestHeader('Authorization', token); //modificar la cabecera
+                xhr.send(formData);
             }
-
-            xhr.open('POST', url, true); //hacer la petición ajax
-            xhr.setRequestHeader('Authorization', token); //modificar la cabecera
-            xhr.send(formData);
+            
         });
     }
 

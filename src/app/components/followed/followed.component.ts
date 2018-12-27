@@ -8,12 +8,12 @@ import { GLOBAL } from '../../services/global';
 
 @Component({ 
     //metadatos (características)
-    selector: 'following',
-    templateUrl: './following.component.html',
+    selector: 'followed',
+    templateUrl: './followed.component.html',
     providers: [UserService, FollowService] //cargar los servicios 
 })
 
-export class FollowingComponent implements OnInit {
+export class FollowedComponent implements OnInit {
     public title:string;
     public identity;
     public token;
@@ -26,7 +26,7 @@ export class FollowingComponent implements OnInit {
     public status:string;
     public follows;
     public follows_user_login;
-    public following;
+    public followed;
     public url;
     public userPageId;
 
@@ -36,7 +36,7 @@ export class FollowingComponent implements OnInit {
         private _userService: UserService,
         private _followService: FollowService
     ){
-        this.title = 'Usuarios seguidos por';
+        this.title = 'Seguidores de';
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.url = GLOBAL.url;
@@ -73,14 +73,15 @@ export class FollowingComponent implements OnInit {
             }
            
             //devolver listado de usuarios
+           
+            //this.getUser(this.identity._id, page);//obtener datos del usuario logueado
             this.getFollows(this.identity._id, page);
-            this.getUser(user_id, page);
-
+            this.getUser(user_id, page);//obtener datos de un usuario 
         });
     }
 
     getFollows(user_id, page){
-        this._followService.getFollowing(this.token, user_id, page).subscribe(
+        this._followService.getFollowed(this.token, user_id, page).subscribe(
             response => {
                 if(!response.follows){
                     this.status = 'error';
@@ -90,15 +91,16 @@ export class FollowingComponent implements OnInit {
                     }
                     else{
                         console.log(response)
-                        this.follows = response.users_following;
+                        this.follows = response.users_following; 
                     }
+
                     this.total = response.total;
-                    this.following = response.follows;
+                    this.followed = response.follows;
                     this.pages = response.pages;
-                    
+
                     /*if(page > this.pages){
                         this._router.navigate(['/gente', 1]);
-                    } */
+                    }*/
                 }
             },
             error => {
@@ -116,6 +118,7 @@ export class FollowingComponent implements OnInit {
         this._userService.getUser(user_id).subscribe(
             response => {
                 if(response.user){
+                    console.log(response)
                     this.user = response.user;
                     this.getFollows(user_id, page);
                 }else{

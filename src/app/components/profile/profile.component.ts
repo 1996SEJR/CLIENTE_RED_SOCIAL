@@ -54,8 +54,7 @@ export class ProfileComponent implements OnInit {
     getUser(id){
         this._userService.getUser(id).subscribe(
             response => {
-                console.log('profile.component')
-                console.log(response.user)
+                //console.log(response.user)
                 if(response.user){
                     this.user = response.user;
 

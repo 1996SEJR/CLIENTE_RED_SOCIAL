@@ -2,39 +2,38 @@
 
 <div class="col-lg-8">
     <h1 class="h1-strong" *ngIf="user">{{title}} {{user.name}} {{user.username}}</h1>
-
-    <div class="people" *ngIf="following">
+    <div class="people" *ngIf="followed">
 
         <!-- LISTAR USUARIOS -->
-        <div *ngFor="let follow of following"  class="item-user">
+        <div *ngFor="let follow of followed"  class="item-user">
             <div>
                     <div class="panel panel-default">
                             <div class="panel-body">
             
                                 <div class="image-user pull-left">
                                     <a href="#">
-                                        <img src="{{url + 'get-image-user/' +follow.followed.image }}" *ngIf="follow.followed.image">
-                                        <img src="assets/user.png" class="avatar-default" *ngIf="!follow.followed.image">
+                                        <img src="{{url + 'get-image-user/' +follow.user.image }}" *ngIf="follow.user.image">
+                                        <img src="assets/user.png" class="avatar-default" *ngIf="!follow.user.image">
                                     </a>
                                 </div>
                                 <div class="user-name pull-left">
                                     <p class="name-username">
-                                        <a [routerLink]="['/perfil', follow.followed._id]">
-                                            {{follow.followed.name + ' ' + follow.followed.username}}
+                                        <a [routerLink]="['/perfil', follow.user._id]">
+                                            {{follow.user.name + ' ' + follow.user.username}}
                                         </a>
                                     </p>
                                     <p class="nickname">
-                                        {{follow.followed.nick}}
-                                        {{follow.followed.email}} 
+                                        {{follow.user.nick}}
+                                        {{follow.user.email}} 
                                     </p>
                                     
                                 </div>
             
                                 <!-- SEGUIR O DEJAR DE SEGUIR-->
-                                <div class="pull-right"  *ngIf="follow.followed._id != identity._id">
+                                <div class="pull-right"  *ngIf="follow.user._id != identity._id">
                                     <button class="btn btn-success" 
-                                    *ngIf="follows_user_login.indexOf(follow.followed._id) < 0"
-                                    (click)="followUser(follow.followed._id)">
+                                    *ngIf="follows_user_login.indexOf(follow.user._id) < 0"
+                                    (click)="followUser(follow.user._id)">
                                         <span class="glyphicon glyphicon-plus-sign"></span>
                                         Seguir
                                     </button>
@@ -42,16 +41,16 @@
                                     <!--EL COLOR ROJO SE MOSTRARÁ CUANDO EL MOUSE ESTÉ ENCIMA DEL BOTÓN-->
                                     <!--EL COLOR AZUL SE MOSTRARÁ CUANDO EL MOUSE NO ESTÉ ENCIMA DEL BOTÓN-->
                                     <button class="btn btn-primary" 
-                                    *ngIf="follows_user_login.indexOf(follow.followed._id) >= 0"
-                                    (click)="unfollowUser(follow.followed._id)"
-                                    (mouseenter)="mouseEnter(follow.followed._id)"
+                                    *ngIf="follows_user_login.indexOf(follow.user._id) >= 0"
+                                    (click)="unfollowUser(follow.user._id)"
+                                    (mouseenter)="mouseEnter(follow.user._id)"
                                     (mouseleave)="mouseLeave()"  
                                     
                                     
-                                    [class.btn-danger] ="follow.followed._id == followUserOver"                   
+                                    [class.btn-danger] ="follow.user._id == followUserOver"                   
                                     >                            
                                         <!--ELSE FOLLOWING ENLACE CON EL NG-TEMPLATE #FOLLOWING-->
-                                        <span *ngIf="follow.followed._id == followUserOver; else following">
+                                        <span *ngIf="follow.user._id == followUserOver; else following">
                                             <span class="glyphicon glyphicon-minus-sign"></span>
                                             <!--EL TEXTO DEJAR DE SEGUIR SE MOSTRARÁ CUANDO EL MOUSE ESTÉ ENCIMA DEL BOTÓN-->
                                             Dejar de seguir
@@ -72,10 +71,10 @@
         <!-- PAGINACION -->
         <ul class="pagination pull-right">
             <li *ngIf="page > 1">
-                <a [routerLink]="['/siguiendo', userPageId, prev_page]">Anterior</a>
+                <a [routerLink]="['/seguidores', userPageId, prev_page]">Anterior</a>
             </li>
             <li *ngIf="pages != page">
-                <a [routerLink]="['/siguiendo', userPageId, next_page]">Siguiente</a>
+                <a [routerLink]="['/seguidores', userPageId, next_page]">Siguiente</a>
             </li>
         </ul>
 
