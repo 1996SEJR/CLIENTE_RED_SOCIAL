@@ -5,6 +5,12 @@ import { MomentModule } from 'angular2-moment'; //libreria para mostrar hace cua
 import { FormsModule } from "@angular/forms";
 //import { HttpModule } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
+
+
+//modulo de mensajes (modulo personalizado)
+import { MessagesModule } from './messages/messages.module';
+
+
 //cargar componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -40,7 +46,8 @@ import { FollowedComponent } from './components/followed/followed.component';
     routing,
     FormsModule,
     HttpClientModule,
-    MomentModule
+    MomentModule,
+    MessagesModule
   ],
   providers: [
     appRoutingProviders
