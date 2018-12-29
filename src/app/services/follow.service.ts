@@ -52,4 +52,12 @@ export class FollowService{
         }
     }
 
+    //obtener mis seguidores
+    getMyFollows(token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('Authorization', token);
+                                        
+        return this._http.get(this.url + 'get-my-follows/true', {headers: headers});
+    }
+
 }
