@@ -71,11 +71,9 @@ export class FollowingComponent implements OnInit {
                     this.prev_page = 1;
                 }
             }
-           
             //devolver listado de usuarios
             this.getFollows(this.identity._id, page);
             this.getUser(user_id, page);
-
         });
     }
 
