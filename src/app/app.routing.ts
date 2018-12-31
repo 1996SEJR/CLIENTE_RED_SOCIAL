@@ -11,12 +11,15 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
+import { ValidarEmailComponent } from './components/validar-email/validar-email.component';
+
 
 
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
     {path: 'login', component: LoginComponent},
+    {path: 'verify', component: ValidarEmailComponent},
     {path: 'registro', component: RegisterComponent},
     {path: 'mis-datos', component: UserEditComponent},    
     {path: 'gente', component: UsersComponent},        

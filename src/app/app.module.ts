@@ -24,6 +24,8 @@ import { PublicationsComponent } from './components/publications/publications.co
 import { ProfileComponent } from './components/profile/profile.component';
 import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
+import { ValidarEmailComponent } from './components/validar-email/validar-email.component';
+
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { FollowedComponent } from './components/followed/followed.component';
     PublicationsComponent,
     ProfileComponent,
     FollowingComponent,
-    FollowedComponent
+    FollowedComponent,
+    ValidarEmailComponent
   ],
   imports: [
     BrowserModule,

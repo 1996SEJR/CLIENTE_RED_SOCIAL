@@ -37,6 +37,18 @@ export class RegisterComponent implements OnInit {
                     this.status = 'success';
                     //form.reset();
                     form.resetForm(); // or form.reset();
+
+
+                    /*this._userService.sendEmailVerification(this.user).subscribe(
+                        response => {
+                        },
+                        error => {
+                            console.log(<any>error);
+                            console.log('error al enviar correo');
+                        }
+                    );*/
+
+                    
                 }else{
                     this.status = 'danger';
                     console.log(response);
@@ -46,6 +58,7 @@ export class RegisterComponent implements OnInit {
                 console.log(<any>error);
             }
         );
+        
     }
 }
   

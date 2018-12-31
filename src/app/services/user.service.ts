@@ -10,12 +10,14 @@ export class UserService{
     public identity;
     public token;
     public stats;
+    //public header;
 
     //_http permite llamar al api y utilizar los métodos que hay se encuentran
     constructor(
         public _http: HttpClient
     ){
         this.url = GLOBAL.url;
+        //this.header =  new HttpHeaders().set('Content-Type', 'application/json');
     }
 
     register(user: User): Observable<any>{
@@ -23,6 +25,13 @@ export class UserService{
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
         return this._http.post(this.url+'register', params, {headers: headers});
+    }
+
+    verificationEmail(id):Observable<any>{
+        //let params = JSON.stringify(user);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        return this._http.get(this.url+'verification-of-email?' + id, {headers: headers});
     }
 
     //metodo de login

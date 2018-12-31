@@ -2,7 +2,10 @@
     <h1 class="h1-strong">{{title}}</h1>
 
     <div class="alert alert-success" *ngIf="status == 'success'">
+        <!--
         Registro completado con éxito, <a [routerLink] = "['/login']" >identifícate aquí</a>
+        -->
+        Por favor, revice la bandeja de entrada de su correo electrónico para activar la cuenta!
     </div>
 
     <div class="alert alert-danger" *ngIf="status == 'danger'">
