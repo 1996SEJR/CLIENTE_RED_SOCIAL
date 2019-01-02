@@ -6,7 +6,7 @@
 
         <!-- LISTAR USUARIOS -->
         <div *ngFor="let message of messages"  class="item-user">
-            <div>
+            <div *ngIf="message.emmiter">
                 <div class="panel panel-default">
                     <div class="panel-body">
     
