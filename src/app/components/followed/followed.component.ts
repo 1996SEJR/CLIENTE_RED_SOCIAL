@@ -86,11 +86,12 @@ export class FollowedComponent implements OnInit {
                 if(!response.follows){
                     this.status = 'error';
                 }else{
+                    console.log(response)
                     if(user_id == this.identity._id){
                         this.follows_user_login = response.users_following;
                     }
                     else{
-                        console.log(response)
+                        
                         this.follows = response.users_following; 
                     }
 

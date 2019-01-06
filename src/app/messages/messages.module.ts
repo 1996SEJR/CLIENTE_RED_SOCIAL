@@ -13,6 +13,10 @@ import { AddComponent } from './components/add/add.component';
 import { ReceivedComponent } from './components/received/received.component';
 import { SendedComponent } from './components/sended/sended.component';
 
+//servicios para validar accedo a las rutas de usuarios logueados
+import { UserService } from '../services/user.service';
+import { UserGuard } from '../services/user.guard';
+
 @NgModule({
     declarations: [
         MainComponent,
@@ -35,7 +39,10 @@ import { SendedComponent } from './components/sended/sended.component';
         SendedComponent
     ],
     //servicios
-    providers: []
+    providers: [
+        UserService,
+        UserGuard
+    ]
 })
 
 export class MessagesModule { }

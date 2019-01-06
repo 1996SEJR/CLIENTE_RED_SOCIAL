@@ -39,9 +39,7 @@ export class LoginComponent implements OnInit {
             
             response => { //responde funcion de callback
                 this.identity = response.user;
-                console.log('on submit --- login');
                 console.log(this.identity);
-                alert('on submit --- login');
                 
                 if(!this.identity || !this.identity._id){//si no existe (si es null) 
                     this.status = 'error';                    
@@ -56,7 +54,6 @@ export class LoginComponent implements OnInit {
             },
             error => { //error funcion de callback
                 var errorMessage = <any>error;
-                alert(errorMessage);
                 
                 if(errorMessage != null){
                     this.status = 'error';

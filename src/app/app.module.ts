@@ -26,6 +26,9 @@ import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
 import { ValidarEmailComponent } from './components/validar-email/validar-email.component';
 
+//servicios para validar accedo a las rutas de usuarios logueados
+import { UserService } from './services/user.service';
+import { UserGuard } from './services/user.guard';
 
 
 @NgModule({
@@ -53,7 +56,9 @@ import { ValidarEmailComponent } from './components/validar-email/validar-email.
     MessagesModule
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    UserService,
+    UserGuard
   ],
   bootstrap: [AppComponent]
 })
