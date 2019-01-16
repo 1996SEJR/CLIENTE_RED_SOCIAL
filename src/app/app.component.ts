@@ -15,6 +15,7 @@ import { GLOBAL } from './services/global';
 export class AppComponent  {
   public title:string;
   public identity;
+  public stats;
   public url: string;
 
   constructor(
@@ -34,6 +35,8 @@ export class AppComponent  {
   //ngDoCheck: cada vez que se produce un cambio refrescar variables
   ngDoCheck(){//importar DoCheck
     this.identity = this._userService.getIdentity();
+    this.stats = this._userService.getStats();
+    //console.log(this.stats);
   }
 
   logout(){

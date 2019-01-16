@@ -70,8 +70,7 @@ export class LoginComponent implements OnInit {
                 
                 if(this.token.length <= 0){//si no existe (si es null) 
                     this.status = 'error';                    
-                }else{
-                    
+                }else{                    
 
                     //PERSISTIR TOKEN DEL USUARIO
                     localStorage.setItem('token', this.token);//guardar una nueva variable en el localStorage

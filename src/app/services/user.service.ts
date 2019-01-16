@@ -88,6 +88,7 @@ export class UserService{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                         .set('Authorization', this.getToken());
 
+                                    
         if(userId != null){
             return this._http.get(this.url+'counters/'+userId, {headers: headers});
         }else{
@@ -97,7 +98,7 @@ export class UserService{
 
     updateUser(user:User):Observable<any>{
         let params = JSON.stringify(user);
-        console.log('servicios');
+        //console.log('servicios');
         console.log(user);
         console.log(params);
         let headers = new HttpHeaders().set('Content-Type', 'application/json')

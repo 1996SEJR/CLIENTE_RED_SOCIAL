@@ -1,12 +1,20 @@
-<div class="col-lg-6">
-    <h1 class="h1-strong">{{title}}</h1>
-
-    <div class="alert alert-success" *ngIf="status == 'success'">
-        <p>La verificación de la cuenta se ha realizado con éxito</p>
-        Pulsa <a [routerLink] = "['/login']" >aquí</a> para iniciar sesión
-    </div>
-
-    <div class="alert alert-danger" *ngIf="status == 'error'">
-        Se ha producido un error en la 
+<div class="centrado-porcentual">
+    <div class="container-fluid ">
+        <div class="row ">
+            <div class="form-container ">
+                <!-- -->
+                <h1 class="h1-strong" >{{title}}</h1>
+    
+                <div *ngIf="status == 'success'" >
+                    <p>La verificación de la cuenta se ha realizado con éxito</p>
+                    Pulsa <a [routerLink] = "['/login']" >aquí</a> para iniciar sesión
+                </div>
+    
+                <div *ngIf="status == 'error'">
+                    Se ha producido un error en la activación de la cuenta
+                </div>
+                <!-- -->
+            </div>
+        </div>
     </div>
 </div>

@@ -16,6 +16,7 @@ import { Follow } from '../../modules/follow';
 export class UsersComponent implements OnInit {
     public title:string;
     public identity;
+    public stats;
     public token;
     public page;
     public next_page;
@@ -36,6 +37,7 @@ export class UsersComponent implements OnInit {
         this.title = 'Gente';
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
+        this.stats = this._userService.getStats(); //estadisticas del usuario
         this.url = GLOBAL.url;
     }
 
@@ -93,6 +95,7 @@ export class UsersComponent implements OnInit {
                     if(page > this.pages){
                         this._router.navigate(['/gente', 1]);
                     }
+                
                 }
             },
             error => {
@@ -127,6 +130,7 @@ export class UsersComponent implements OnInit {
                     //agregar al arreglode follows el id del usuario que se está acabando de seguir
                     this.follows.push(followed);                   
                     console.log(this.follows);
+                    this.getCounter();
                 }
             },
             error => {
@@ -149,6 +153,7 @@ export class UsersComponent implements OnInit {
                 if(search != -1){
                     //splice eliminar el elemento encontrado (usuario)
                     this.follows.splice(search, 1);
+                    this.getCounter();
                 }
             },
             error => {
@@ -160,5 +165,20 @@ export class UsersComponent implements OnInit {
             }
         );
     } 
+
+    getCounter(){
+        this._userService.getCounters().subscribe(
+            response => {
+                this.stats = response;
+                console.log(response);
+                console.log(this.stats);
+                localStorage.setItem('stats', JSON.stringify(response));
+                this.status = 'success';
+            },
+            error => {
+                console.log(<any>error);
+            }
+        )
+    }
 }
   

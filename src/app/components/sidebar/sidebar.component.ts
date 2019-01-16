@@ -8,6 +8,7 @@ import { PublicationService } from '../../services/publication.service';
 import { UploadService } from '../../services/upload.service';
 import { GLOBAL } from '../../services/global';
 import { Publication } from '../../modules/publication';
+import { stat } from 'fs';
 
 @Component({ 
     //metadatos (características)
@@ -19,7 +20,8 @@ import { Publication } from '../../modules/publication';
 export class SidebarComponent implements OnInit {
     public identity;
     public token;
-    public stats;
+    //public stats;
+    @Input() stats:string; //esta propiedad se llena con un valor de afuera
     public url;
     public status;//para mostrar mensajes de error o exito
     public publication: Publication;
@@ -61,13 +63,16 @@ export class SidebarComponent implements OnInit {
                         });
                     }
 
-                    this.status = "success";
+                    //this.status = "success";
+                    
+                    
+                    this.sended.emit({send: 'true'});//se emite el evento
+                    
+                    //CONSEGUIR LAS ESTADÍSTICAS DEL USUARIO (MIS SEGUIDORES Y A QUIENES SIGO)
+                    this.getCounter();
                     
                     form.resetForm(); // or form.reset();
-                    this.sended.emit({send: 'true'});//se emite el evento
                     this._router.navigate(['/timeline']);
-                    
-                    
                 }else{
                     this.status = 'error';
                 }
@@ -91,7 +96,22 @@ export class SidebarComponent implements OnInit {
     //video 113: recargar publicaciones
     @Output() sended = new EventEmitter();
     sendPublication(event){
-        //console.log(event);
+        console.log('hla')
+        console.log(event);
         this.sended.emit({send: 'true'});//se emite el evento
+    }
+
+    getCounter(){
+        this._userService.getCounters().subscribe(
+            response => {
+                this.stats = response;
+                /*console.log(response);
+                localStorage.setItem('stats', JSON.stringify(response));
+                this.status = 'success';*/
+            },
+            error => {
+                console.log(<any>error);
+            }
+        )
     }
 }

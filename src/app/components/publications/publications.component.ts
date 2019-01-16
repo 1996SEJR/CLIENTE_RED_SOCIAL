@@ -25,7 +25,7 @@ export class PublicationsComponent implements OnInit {
     public publications: Publication[];
     @Input() user:string; //esta propiedad se llena con un valor de afuera
     //public status:string;
-
+    
     public constructor(
         private _route: ActivatedRoute,
         private _router: Router,
@@ -43,7 +43,6 @@ export class PublicationsComponent implements OnInit {
         console.log('Componente de publications cargado ...');
         //console.log(this.user)
         this.getPublications(this.user, this.page);
-        
     }
 
     //obtener las publicaciones 

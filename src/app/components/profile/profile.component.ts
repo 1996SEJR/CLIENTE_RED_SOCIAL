@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit {
                     }else{
                         this.followed = false;
                     }
-
+                    
                 }else{
                     this.status = 'error';
                 }

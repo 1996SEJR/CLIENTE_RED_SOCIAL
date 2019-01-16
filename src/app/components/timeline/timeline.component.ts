@@ -17,6 +17,7 @@ export class TimelineComponent implements OnInit {
     public title:string;//propiedades de la clase
     public identity;
     public token;    
+    public stats;
     public url: string;
     public status: string;
     public page;
@@ -35,6 +36,7 @@ export class TimelineComponent implements OnInit {
         this.title='Timeline';
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
+        this.stats = this._userService.getStats(); //estadisticas del usuario
         this.url = GLOBAL.url;
         this.page = 1;
     }
@@ -106,6 +108,7 @@ export class TimelineComponent implements OnInit {
     }
 
     refreshPublications(event = null){
+        this.getCounter();
         this.getPublications(1);
         //console.log(event);
     }
@@ -120,6 +123,21 @@ export class TimelineComponent implements OnInit {
                 this.refreshPublications();
             },
             error =>{
+                console.log(<any>error);
+            }
+        )
+    }
+
+    getCounter(){
+        this._userService.getCounters().subscribe(
+            response => {
+                console.log(response);
+                this.stats = response;
+                localStorage.setItem('stats', JSON.stringify(response));
+                this.status = 'success';
+                this._router.navigate(['/timeline']);
+            },
+            error => {
                 console.log(<any>error);
             }
         )
