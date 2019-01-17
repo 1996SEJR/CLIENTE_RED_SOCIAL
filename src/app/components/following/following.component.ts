@@ -76,6 +76,7 @@ export class FollowingComponent implements OnInit {
             this.getUser(user_id, page);
         });
     }
+    
 
     getFollows(user_id, page){
         this._followService.getFollowing(this.token, user_id, page).subscribe(

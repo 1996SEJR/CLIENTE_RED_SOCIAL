@@ -8,7 +8,7 @@ import { PublicationService } from '../../services/publication.service';
 import { UploadService } from '../../services/upload.service';
 import { GLOBAL } from '../../services/global';
 import { Publication } from '../../modules/publication';
-import { stat } from 'fs';
+//import { stat } from 'fs';
 
 @Component({ 
     //metadatos (características)
@@ -38,7 +38,7 @@ export class SidebarComponent implements OnInit {
         this.stats = this._userService.getStats(); //estadisticas del usuario
         //console.log(this.stats);
         this.url = GLOBAL.url;
-        this.publication = new Publication("", "", "", "", this.identity._id);
+        this.publication = new Publication("", "", "", "", "", this.identity._id);
 
     }
 

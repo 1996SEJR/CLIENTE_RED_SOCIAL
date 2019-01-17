@@ -134,7 +134,6 @@ export class UsersComponent implements OnInit {
                 }
             },
             error => {
-                
                 var errorMessage = <any> error;
                 console.log(errorMessage);
                 if(errorMessage != null){
@@ -143,6 +142,7 @@ export class UsersComponent implements OnInit {
             }
         );
     }
+    
 
     unfollowUser(followed){
         this._followService.deleteFollow(this.token, followed).subscribe(

@@ -4,9 +4,12 @@
         <sidebar></sidebar>
 
         <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+            <!--
             <h1 class="h1-strong">
                 {{title}}
             </h1> 
+            -->
+            
             <div id="data-profile" *ngIf="user">
                 <div class="avatar pull-left">
                     <img src="{{url + 'get-image-user/' + user.image }}" *ngIf="user.image">
