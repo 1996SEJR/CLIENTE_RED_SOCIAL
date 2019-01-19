@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
     public identity;
     public token;    
     public stats;
+    public stats_user_login;
     public url: string;
     public followed = false;
     public following = false;
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
         this.title='Perfil';
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
+        this.stats_user_login = this._userService.getStats(); //estadisticas del usuario logueado
         this.url = GLOBAL.url;
     }
 
@@ -48,6 +50,7 @@ export class ProfileComponent implements OnInit {
             let id = params['id'];
             this.getUser(id);
             this.getCounters(id);
+
         });
     }
 
@@ -64,7 +67,6 @@ export class ProfileComponent implements OnInit {
                         this.following = false;
                     }
 
-                    
                     if(response.followed && response.followed._id){
                         this.followed = true;
                     }else{
@@ -86,6 +88,7 @@ export class ProfileComponent implements OnInit {
         this._userService.getCounters(id).subscribe(
             response => {
                 this.stats = response;
+                console.log(this.stats);
             },
             error => {
                 console.log(<any>error);
@@ -100,6 +103,12 @@ export class ProfileComponent implements OnInit {
         this._followService.addFollow(this.token, follow).subscribe(
             response => {                
                 this.following = true;
+                this.getCounter();
+
+                this._route.params.subscribe( params => { 
+                    let id = params['id'];
+                    this.getCounters(id);        
+                });
             },
             error => {
                 console.log(<any> error);
@@ -113,6 +122,12 @@ export class ProfileComponent implements OnInit {
         this._followService.deleteFollow(this.token, followed).subscribe(
             response => {
                 this.following = false;
+                this.getCounter();
+
+                this._route.params.subscribe( params => { 
+                    let id = params['id'];
+                    this.getCounters(id);        
+                });
             },
             error => {
                 console.log(<any> error);
@@ -128,5 +143,21 @@ export class ProfileComponent implements OnInit {
 
     mouseLeave(){
         this.followUserOver = 0;
+    }
+
+    getCounter(){
+        this._userService.getCounters().subscribe(
+            response => {
+                console.log(response);
+                this.stats_user_login = response;
+                localStorage.setItem('stats', JSON.stringify(response));
+                /*localStorage.setItem('stats', JSON.stringify(response));
+                this.status = 'success';
+                this._router.navigate(['/timeline']);*/
+            },
+            error => {
+                console.log(<any>error);
+            }
+        )
     }
 }

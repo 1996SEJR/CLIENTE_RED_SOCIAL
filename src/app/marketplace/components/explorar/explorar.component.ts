@@ -9,12 +9,12 @@ import { FollowService } from '../../../services/follow.service';
 import { GLOBAL } from '../../../services/global';
 
 @Component({
-    selector: 'add',
-    templateUrl: './add.component.html',
+    selector: 'explorar',
+    templateUrl: './explorar.component.html',
     providers: [FollowService, MessageService]
 })
 
-export class AddComponent implements OnInit {
+export class ExplorarComponent implements OnInit {
     
     public title:string;
     public message: Message;
@@ -63,7 +63,6 @@ export class AddComponent implements OnInit {
         this._followService.getMyFollows(this.token).subscribe(
             response => {
                 this.follows = response.follows;
-                console.log(this.follows);
             },
             error => {
                 console.log(<any>error)

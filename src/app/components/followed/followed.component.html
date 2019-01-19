@@ -1,6 +1,6 @@
 <div class="">
     <div class="">
-        <sidebar></sidebar>
+        <sidebar [stats]="stats"></sidebar>
         
         <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
             <h1 class="h1-strong" *ngIf="user">{{title}} {{user.name}} {{user.username}}</h1>

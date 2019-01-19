@@ -29,6 +29,8 @@ export class FollowedComponent implements OnInit {
     public followed;
     public url;
     public userPageId;
+    public stats;
+    public user_id;
 
     public constructor(
         private _route: ActivatedRoute,
@@ -40,6 +42,7 @@ export class FollowedComponent implements OnInit {
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.url = GLOBAL.url;
+        this.stats = this._userService.getStats(); //estadisticas del usuario logueado
     }
 
     ngOnInit(){
@@ -49,8 +52,8 @@ export class FollowedComponent implements OnInit {
 
     actualPage(){
         this._route.params.subscribe(params => {
-            let user_id = params['id'];
-            this.userPageId = user_id;
+            this.user_id = params['id'];
+            this.userPageId = this.user_id;
             //el signo + convierte a entero
             let page = +params['page']; //obtener un parámetro de la url            
             this.page = page;
@@ -76,7 +79,7 @@ export class FollowedComponent implements OnInit {
            
             //this.getUser(this.identity._id, page);//obtener datos del usuario logueado
             this.getFollows(this.identity._id, page);
-            this.getUser(user_id, page);//obtener datos de un usuario 
+            this.getUser(this.user_id, page);//obtener datos de un usuario 
         });
     }
 
@@ -90,8 +93,7 @@ export class FollowedComponent implements OnInit {
                     if(user_id == this.identity._id){
                         this.follows_user_login = response.users_following;
                     }
-                    else{
-                        
+                    else{                        
                         this.follows = response.users_following; 
                     }
 
@@ -156,9 +158,20 @@ export class FollowedComponent implements OnInit {
                     this.status = 'error';
                 }else{
                     this.status = 'success';
-                    //agregar al arreglode follows el id del usuario que se está acabando de seguir
-                    this.follows.push(followed);                   
-                    console.log(this.follows);
+
+                    if(this.user_id == this.identity._id){
+                        this.follows_user_login.push(followed);                   
+                        console.log(this.follows_user_login);
+                    }else{
+                        //agregar al arreglode follows el id del usuario que se está acabando de seguir
+                        this.follows.push(followed);                   
+                        console.log(this.follows);
+                        
+                    }
+
+                    this.actualPage();
+                    this.getCounter();
+
                 }
             },
             error => {
@@ -175,13 +188,29 @@ export class FollowedComponent implements OnInit {
     unfollowUser(followed){
         this._followService.deleteFollow(this.token, followed).subscribe(
             response => {
-                var search = this.follows.indexOf(followed);
-                //si no encuentra search será -1
-                console.log(search);
-                if(search != -1){
-                    //splice eliminar el elemento encontrado (usuario)
-                    this.follows.splice(search, 1);
+
+                if(this.user_id == this.identity._id){
+                    var search = this.follows_user_login.indexOf(followed);
+                    //si no encuentra search será -1
+                    console.log(search);
+                    if(search != -1){
+                        //splice eliminar el elemento encontrado (usuario)
+                        this.follows_user_login.splice(search, 1);                    
+                        //this.following.splice(search, 1);                    
+                    }                    
+                }else{
+                    var search = this.follows.indexOf(followed);
+
+                    //si no encuentra search será -1
+                    console.log(search);
+                    if(search != -1){
+                        //splice eliminar el elemento encontrado (usuario)
+                        this.follows.splice(search, 1);                    
+                    }
+                    
                 }
+                this.actualPage();
+                this.getCounter();
             },
             error => {
                 var errorMessage = <any> error;
@@ -192,5 +221,21 @@ export class FollowedComponent implements OnInit {
             }
         );
     } 
+
+    getCounter(){
+        this._userService.getCounters().subscribe(
+            response => {
+                console.log(response);
+                this.stats = response;
+                localStorage.setItem('stats', JSON.stringify(response));
+                /*localStorage.setItem('stats', JSON.stringify(response));
+                this.status = 'success';
+                this._router.navigate(['/timeline']);*/
+            },
+            error => {
+                console.log(<any>error);
+            }
+        )
+    }
 }
   

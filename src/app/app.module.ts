@@ -9,6 +9,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 //modulo de mensajes (modulo personalizado)
 import { MessagesModule } from './messages/messages.module';
+import { MarketplaceModule } from './marketplace/marketplace.module';
 
 
 //cargar componentes
@@ -53,7 +54,8 @@ import { UserGuard } from './services/user.guard';
     FormsModule,
     HttpClientModule,
     MomentModule,
-    MessagesModule
+    MessagesModule,
+    MarketplaceModule
   ],
   providers: [
     appRoutingProviders,

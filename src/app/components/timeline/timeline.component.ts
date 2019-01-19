@@ -88,10 +88,10 @@ export class TimelineComponent implements OnInit {
                         var arrayA = this.publications;
                         var arrayB = response.publications;
                         this.publications = arrayA.concat(arrayB);
-
                         //para poder usar jquery instalar
                         //npm install --save @types/jquery
                         $("html, body").animate({ scrollTop: $('html').prop("scrollHeight")}, 500);
+                        
                         
                         /*console.log('array a')
                         console.log(arrayA)
@@ -135,10 +135,10 @@ export class TimelineComponent implements OnInit {
 
 
     refreshPublications(event = null){
-        this.page = 1;
-        this.noMore = false;
+        //this.page = 1;
+        //this.noMore = false;
         this.getCounter();
-        this.getPublications(1);
+        this.getPublications(this.page);
         //console.log(event);
     }
 
@@ -198,7 +198,6 @@ export class TimelineComponent implements OnInit {
             response => {
                 var search = this.estadisticas_likes.indexOf(publication);
                 //si no encuentra search será -1
-                console.log(search);
                 if(search != -1){
                     //splice eliminar el elemento encontrado (usuario)
                     this.estadisticas_likes.splice(search, 1);

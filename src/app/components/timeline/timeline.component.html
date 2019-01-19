@@ -65,16 +65,19 @@
                                 </div>    
                             </div>
                             
-                            <div class="publication-text pull-left">
+                            <div class="publication-text ">
                                 <h4>{{publication.text}} </h4>
                             </div>
 
                             <br>
-                            <br>
                             <!--video 125 botones para mostrar las imagenes -->
-                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" *ngIf="publication.file != 'null' ">    
-                                <img src="{{ url + 'get-image-pub/' + publication.file }}" class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                            <div class="contenedor">
+                                <div class="col-6 contenido" *ngIf="publication.file != 'null'">    
+                                    <img src="{{ url + 'get-image-pub/' + publication.file }}" class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                </div>
                             </div>
+                            
+
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="text-center">
                                     <a class="btn" 
@@ -89,8 +92,7 @@
                                         <span class="glyphicon glyphicon-heart"></span>
                                         <b> Te gusta </b> {{publication.number_likes}}
                                     </a>
-                                </div>
-                                
+                                </div> 
                             </div>
                         </div>
                     </div>

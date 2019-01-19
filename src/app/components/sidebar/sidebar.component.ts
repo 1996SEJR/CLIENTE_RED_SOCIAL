@@ -63,7 +63,7 @@ export class SidebarComponent implements OnInit {
                         });
                     }
 
-                    //this.status = "success";
+                    this.status = "success";
                     
                     
                     this.sended.emit({send: 'true'});//se emite el evento

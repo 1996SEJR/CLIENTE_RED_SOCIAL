@@ -22,14 +22,11 @@
             <div class="clearfix"></div>
         </div>
     
-        <div class="clearfix"></div>
-    
         <div class="stats" *ngIf="stats">
-            <div class="following-data ">
+            <div class="following-data " id="izquierda">
                 <a [routerLink]="['/siguiendo', identity._id, 1]">
                     <span class="label-stats">
-                        Siguiendo 
-                                                
+                        Siguiendo                   
                     </span>
                     <span class="number-stats">
                         {{stats.following}}
@@ -37,7 +34,7 @@
                 </a>
             </div>
     
-            <div class="following-data">
+            <div class="following-data" id="centro">
                 <a [routerLink]="['/seguidores', identity._id, 1]">
                     <span class="label-stats">
                         Seguidores
@@ -48,7 +45,7 @@
                 </a>
             </div>
     
-            <div class="following-data">
+            <div class="following-data" id="derecha">
                 <a [routerLink]="['/perfil', identity._id]">
                     <span class="label-stats">
                         Publicaciones
@@ -64,11 +61,13 @@
     <!--FORMULARIO DE PUBLICACIONES-->
     <div id="new-publication" class="col-lg-12 col-sm-12 col-md-12 col-xs-12 panel panel-default pull-right ">
         <div class="col-lg-12">
-            <div class="alert alert-success" *ngIf="status == 'success'">
+            <div class="alert alert-success alert-dismissible" *ngIf="status == 'success'">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 Publicación enviada correctamente
             </div>
-        
-            <div class="alert alert-danger" *ngIf="status == 'error'">
+
+            <div class="alert alert-danger alert-dismissible" *ngIf="status == 'error'">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 Publicación no enviada
             </div>
         </div>

@@ -29,6 +29,8 @@ export class FollowingComponent implements OnInit {
     public following;
     public url;
     public userPageId;
+    public stats;
+    public user_id;
 
     public constructor(
         private _route: ActivatedRoute,
@@ -40,6 +42,7 @@ export class FollowingComponent implements OnInit {
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.url = GLOBAL.url;
+        this.stats = this._userService.getStats(); //estadisticas del usuario logueado
     }
 
     ngOnInit(){
@@ -49,8 +52,8 @@ export class FollowingComponent implements OnInit {
 
     actualPage(){
         this._route.params.subscribe(params => {
-            let user_id = params['id'];
-            this.userPageId = user_id;
+            this.user_id = params['id'];
+            this.userPageId = this.user_id;
             //el signo + convierte a entero
             let page = +params['page']; //obtener un parámetro de la url            
             this.page = page;
@@ -73,7 +76,7 @@ export class FollowingComponent implements OnInit {
             }
             //devolver listado de usuarios
             this.getFollows(this.identity._id, page);
-            this.getUser(user_id, page);
+            this.getUser(this.user_id, page);
         });
     }
     
@@ -81,18 +84,23 @@ export class FollowingComponent implements OnInit {
     getFollows(user_id, page){
         this._followService.getFollowing(this.token, user_id, page).subscribe(
             response => {
+                console.log(response)
                 if(!response.follows){
                     this.status = 'error';
                 }else{
                     if(user_id == this.identity._id){
-                        this.follows_user_login = response.users_following;
+                        this.follows_user_login = response.users_following;//response.users_following ids usuarios que estoy siguiendo
+                        //this.follows = response.users_following;
+                        console.log('son iguales');
+                    }else{
+                        console.log(response);
+                        this.follows = response.users_following; //response.users_followings ids usuarios que estoy siguiendo
+                        console.log(this.follows);
                     }
-                    else{
-                        console.log(response)
-                        this.follows = response.users_following;
-                    }
+                    
+
                     this.total = response.total;
-                    this.following = response.follows;
+                    this.following = response.follows; //response.follows toda la data de los usuarios que estamos siguiendo
                     this.pages = response.pages;
                     
                     /*if(page > this.pages){
@@ -151,13 +159,22 @@ export class FollowingComponent implements OnInit {
                     this.status = 'error';
                 }else{
                     this.status = 'success';
-                    //agregar al arreglode follows el id del usuario que se está acabando de seguir
-                    this.follows.push(followed);                   
-                    console.log(this.follows);
+
+                    if(this.user_id == this.identity._id){
+                        this.follows_user_login.push(followed);                   
+                        console.log(this.follows_user_login);
+                    }else{
+                        //agregar al arreglode follows el id del usuario que se está acabando de seguir
+                        this.follows.push(followed);                   
+                        console.log(this.follows);
+                        
+                    }
+
+                    this.actualPage();
+                    this.getCounter();
                 }
             },
-            error => {
-                
+            error => {                
                 var errorMessage = <any> error;
                 console.log(errorMessage);
                 if(errorMessage != null){
@@ -170,13 +187,30 @@ export class FollowingComponent implements OnInit {
     unfollowUser(followed){
         this._followService.deleteFollow(this.token, followed).subscribe(
             response => {
-                var search = this.follows.indexOf(followed);
-                //si no encuentra search será -1
-                console.log(search);
-                if(search != -1){
-                    //splice eliminar el elemento encontrado (usuario)
-                    this.follows.splice(search, 1);
+
+                if(this.user_id == this.identity._id){
+                    var search = this.follows_user_login.indexOf(followed);
+                    //si no encuentra search será -1
+                    console.log(search);
+                    if(search != -1){
+                        //splice eliminar el elemento encontrado (usuario)
+                        this.follows_user_login.splice(search, 1);                    
+                        //this.following.splice(search, 1);                    
+                    }                    
+                }else{
+                    var search = this.follows.indexOf(followed);
+
+                    //si no encuentra search será -1
+                    console.log(search);
+                    if(search != -1){
+                        //splice eliminar el elemento encontrado (usuario)
+                        this.follows.splice(search, 1);                    
+                    }
+                    
                 }
+                this.actualPage();
+                this.getCounter();
+                
             },
             error => {
                 var errorMessage = <any> error;
@@ -187,5 +221,21 @@ export class FollowingComponent implements OnInit {
             }
         );
     } 
+
+    getCounter(){
+        this._userService.getCounters().subscribe(
+            response => {
+                console.log(response);
+                this.stats = response;
+                localStorage.setItem('stats', JSON.stringify(response));
+                /*localStorage.setItem('stats', JSON.stringify(response));
+                this.status = 'success';
+                this._router.navigate(['/timeline']);*/
+            },
+            error => {
+                console.log(<any>error);
+            }
+        )
+    }
 }
   

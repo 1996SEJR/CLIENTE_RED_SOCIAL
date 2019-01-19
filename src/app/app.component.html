@@ -36,6 +36,13 @@
             Mensajes
           </a>
         </li> 
+
+        <li>
+          <a [routerLink]="['/marketplace']" [routerLinkActive]="['active']">
+            <span class="glyphicon glyphicon-envelope"></span>
+            Marketplace
+          </a>
+        </li> 
       </ul>
 
       <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
