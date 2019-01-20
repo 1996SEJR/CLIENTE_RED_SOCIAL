@@ -16,7 +16,7 @@
         <p>
             <label>Para:</label>
             <!--LISTADO DE SEGUIDORES-->
-            <select *ngIf="follows" name="receiver" #receiver="ngModel" [(ngModel)]="message.receiver" class="form-control" required>
+            <select *ngIf="follows" name="receiver" #receiver="ngModel" [(ngModel)]="message.receiver" class="form-control " data-live-search="true" title="Selecciona al receptor" required>
                 <option *ngFor="let follow of follows" value="{{follow.user._id}}">
                     {{follow.user.name + ' ' + follow.user.username + '(' + follow.user.nick + ')'}}
                 </option>
@@ -38,3 +38,7 @@
         </div>
     </form>
 </div>
+
+<script>
+    $('.selectpicker').selectpicker('refresh');
+</script>

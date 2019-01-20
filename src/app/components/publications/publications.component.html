@@ -43,13 +43,13 @@
 
                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                     <div class="text-center">
-                        <a class="btn" 
+                        <a class="btn btn-danger btn-circle" 
                         *ngIf="estadisticas_likes && estadisticas_likes.indexOf(publication._id) < 0"
                         (click)="likePublication(publication._id)" >           
                             <span class="glyphicon glyphicon-heart"> </span> Me gusta {{publication.number_likes}}
                         </a>
 
-                        <a class="btn" 
+                        <a class="btn btn-primary btn-circle" 
                         *ngIf="estadisticas_likes && estadisticas_likes.indexOf(publication._id) >= 0"
                         (click)="unlikePublication(publication._id)" >
                             <span class="glyphicon glyphicon-heart"></span>

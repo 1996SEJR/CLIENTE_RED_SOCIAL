@@ -82,7 +82,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                            <div class="">
                                 <div class="text-center">
                                     <a class="btn" 
                                     *ngIf="estadisticas_likes && estadisticas_likes.indexOf(publication._id) < 0"
@@ -97,7 +97,20 @@
                                         <b> Te gusta </b> {{publication.number_likes}}
                                     </a>
                                 </div> 
+                                <hr>
+                                
                             </div>
+
+                           
+                            <div class="image-user2 pull-left">
+                                <img src="{{url + 'get-image-user/' + identity.image }}" *ngIf="identity.image">
+                                <img src="assets/user.png" class="avatar-default" *ngIf="!identity.image">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control" style="width: 80%" placeholder="Escribe un comentario">
+
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

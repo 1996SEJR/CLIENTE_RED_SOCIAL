@@ -107,6 +107,7 @@
     width: 100%;
 }
 
+
 .item-user .user-name{
     margin-top: 10px;
 }
@@ -234,6 +235,21 @@
 
 #publication .publication-text h4{
     font-size: 15px;
+}
+
+.item-user .image-user2,
+.item-publication .image-user2
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.item-user .image-user2 img,
+.item-publication .image-user2 img{
+    width: 100%;
 }
 
 /*PERFILES*/
@@ -424,3 +440,5 @@ div #derecha{
 .contenido {
     margin: 0 auto; /* requerido para alineación horizontal */
 }
+
+
