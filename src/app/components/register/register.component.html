@@ -1,87 +1,90 @@
 
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-md-4 col-sm-4 col-xs-12"></div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-            <!--form start-->
+<div class=" ">
+    <div class="">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+            
+           <div class="contenedor">
+               <div class="col-6 contenido">
+                    <!--form start-->
+                <!--#registerForm: nombre del formulario -->
+                <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class=" form-container" >
+                        <h1 class="h1-strong form-actions">{{title}}</h1>
+        
+                        <div class="alert alert-success alert-dismissible" *ngIf="status == 'success'">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            Por favor, revice la bandeja de entrada de su correo electrónico para activar la cuenta!
+                        </div>
+            
+                        <div class="alert alert-danger alert-dismissible" *ngIf="status == 'danger'">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            El registro no ha podido completarse, quizás tu email o nick ya esté en uso, inténtalo de nuevo con otros datos
+                        </div>
+        
+                        <!--campos-->
+                        <p>
+                            <label>Nombre</label>
+                            <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required placeholder="Nombre">
+                            <span *ngIf="!name.valid && name.touched" >
+                                <p class="text-danger">
+                                    <strong> El nombre es obligatorio</strong>
+                                </p>
+                            </span>
+                        </p>
+                        
+                        <p>
+                            <label>Apellido</label>
+                            <input type="text" name="username" #username="ngModel" [(ngModel)]="user.username" class="form-control" required placeholder="Apellido">
+                            <span *ngIf="!username.valid && username.touched" >
+                                <p class="text-danger">
+                                    <strong> El apellido es obligatorio</strong>
+                                </p>
+                            </span>
+                        </p>
+                        
+                        <p>
+                            <label>Apodo</label>
+                            <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" required placeholder="Username">
+                            <span *ngIf="!nick.valid && nick.touched" >
+                                <p class="text-danger">
+                                    <strong> El apodo es obligatorio</strong>
+                                </p>
+                            </span>
+                        </p>
+        
+                        <p>
+                            <label>Email</label>
+                            <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Correo electrónico">
+                            <span *ngIf="!email.valid && email.touched" >
+                                <p class="text-danger">
+                                    <strong> El correo es incorrecto</strong>
+                                </p>
+                            </span>
+                        </p>                
+        
+                        <p>
+                            <label>Contraseña</label>
+                            <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required placeholder="Password">
+                            <span *ngIf="!password.valid && password.touched" >
+                                <p class="text-danger">
+                                    <strong> La contraseña es obligatorio</strong>
+                                </p>
+                            </span>
+                        </p>
+                        
+                        <div class="form-actions">
+                                <input type="submit" value="{{title}}" class="btn btn-success" [disabled]="!registerForm.form.valid">
+                        </div>
+                        <!--
+                            <input type="submit" value="{{title}}" class="btn btn-success" [disabled]="!registerForm.form.valid" >
+                        -->
+                        
+                    </form>
+                    <!--form end-->
+               </div>
+               
+           </div>
            
-            <!--#registerForm: nombre del formulario -->
-            <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-lg-12 form-container" >
-                <h1 class="h1-strong form-actions">{{title}}</h1>
-
-                <div class="alert alert-success alert-dismissible" *ngIf="status == 'success'">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    Por favor, revice la bandeja de entrada de su correo electrónico para activar la cuenta!
-                </div>
-    
-                <div class="alert alert-danger alert-dismissible" *ngIf="status == 'danger'">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    El registro no ha podido completarse, quizás tu email o nick ya esté en uso, inténtalo de nuevo con otros datos
-                </div>
-
-                <!--campos-->
-                <p>
-                    <label>Nombre</label>
-                    <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required placeholder="Nombre">
-                    <span *ngIf="!name.valid && name.touched" >
-                        <p class="text-danger">
-                            <strong> El nombre es obligatorio</strong>
-                        </p>
-                    </span>
-                </p>
-                
-                <p>
-                    <label>Apellido</label>
-                    <input type="text" name="username" #username="ngModel" [(ngModel)]="user.username" class="form-control" required placeholder="Apellido">
-                    <span *ngIf="!username.valid && username.touched" >
-                        <p class="text-danger">
-                            <strong> El apellido es obligatorio</strong>
-                        </p>
-                    </span>
-                </p>
-                
-                <p>
-                    <label>Apodo</label>
-                    <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" required placeholder="Username">
-                    <span *ngIf="!nick.valid && nick.touched" >
-                        <p class="text-danger">
-                            <strong> El apodo es obligatorio</strong>
-                        </p>
-                    </span>
-                </p>
-
-                <p>
-                    <label>Email</label>
-                    <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Correo electrónico">
-                    <span *ngIf="!email.valid && email.touched" >
-                        <p class="text-danger">
-                            <strong> El correo es incorrecto</strong>
-                        </p>
-                    </span>
-                </p>                
-
-                <p>
-                    <label>Contraseña</label>
-                    <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required placeholder="Password">
-                    <span *ngIf="!password.valid && password.touched" >
-                        <p class="text-danger">
-                            <strong> La contraseña es obligatorio</strong>
-                        </p>
-                    </span>
-                </p>
-                
-                <div class="form-actions">
-                        <input type="submit" value="{{title}}" class="btn btn-success">
-                </div>
-                <!--
-                    <input type="submit" value="{{title}}" class="btn btn-success" [disabled]="!registerForm.form.valid" >
-                -->
-                
-            </form>
-            <!--form end-->
         </div>
-
-        <div class="col-md-4 col-sm-4 col-xs-12"></div>  
     </div>
 </div>
 

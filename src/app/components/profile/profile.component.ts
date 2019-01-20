@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
     public followed = false;
     public following = false;
 
+
     public constructor(
         private _route: ActivatedRoute,
         private _router: Router,

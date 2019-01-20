@@ -27,6 +27,7 @@ export class UsersComponent implements OnInit {
     public status:string;
     public follows;
     public url;
+    public buscar;
 
     public constructor(
         private _route: ActivatedRoute,
@@ -79,8 +80,8 @@ export class UsersComponent implements OnInit {
         });
     }
 
-    getUsers(page){
-        this._userService.getUsers(page).subscribe(
+    getUsers(page, search = null){
+        this._userService.getUsers(page, search).subscribe(
             response => {
                 if(!response.users){
                     this.status = 'error';
@@ -179,6 +180,11 @@ export class UsersComponent implements OnInit {
                 console.log(<any>error);
             }
         )
+    }
+
+    buscarGente(){
+        console.log(this.buscar)
+        this.getUsers(this.page, this.buscar);
     }
 }
   

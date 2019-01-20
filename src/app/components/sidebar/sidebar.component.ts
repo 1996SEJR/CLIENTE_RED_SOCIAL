@@ -25,6 +25,7 @@ export class SidebarComponent implements OnInit {
     public url;
     public status;//para mostrar mensajes de error o exito
     public publication: Publication;
+    public enviar_publicacion;
 
     constructor(
         private _route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class SidebarComponent implements OnInit {
         this.stats = this._userService.getStats(); //estadisticas del usuario
         //console.log(this.stats);
         this.url = GLOBAL.url;
+        this.enviar_publicacion = false;
         this.publication = new Publication("", "", "", "", "", this.identity._id);
 
     }
@@ -64,6 +66,7 @@ export class SidebarComponent implements OnInit {
                     }
 
                     this.status = "success";
+                    this.enviar_publicacion = false;
                     
                     
                     this.sended.emit({send: 'true'});//se emite el evento
@@ -89,6 +92,7 @@ export class SidebarComponent implements OnInit {
 
     public filesToUpload: Array<File>; //array de ficheros
     fileChangeEvent(fileInput: any){
+        this.enviar_publicacion = true;
         this.filesToUpload = <Array<File>>fileInput.target.files;
     }
 

@@ -5,20 +5,13 @@
     <div class="container-fluid">
 
       <div class="navbar-header">
-        <a href="#" class="navbar-brand">{{title}}</a>
+        <a [routerLink]="['/home']" [routerLinkActive]="['active']" class="navbar-brand">{{title}}</a>
       </div>
 
       <ul class="nav navbar-nav" *ngIf="identity">
         <li>
-          <a [routerLink]="['/home']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-home"></span>
-            Inicio
-          </a>
-        </li>
-
-        <li>
           <a [routerLink]="['/timeline']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-th-list"></span>
+            <span class="glyphicon glyphicon-home"></span>
             Timeline
           </a>
         </li>

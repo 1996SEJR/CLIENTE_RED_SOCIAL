@@ -7,16 +7,23 @@
             <!--
                 <h1 class="h1-strong">{{title}}</h1><h1 class="h1-strong">{{title}}</h1>
             -->
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" #search="ngModel" [(ngModel)]="buscar" placeholder="Buscar..." (keyup)="buscarGente()">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" (click)="buscarGente()">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
             
-
             <div class="people">
-
                 <!-- LISTAR USUARIOS -->
                 <div *ngFor="let user of users"  class="item-user">
                     <div *ngIf="user._id != identity._id">
                             <div class="panel panel-default">
-                                    <div class="panel-body">
-                    
+                                    <div class="panel-body">                    
                                         <div class="image-user pull-left">
                                             <a href="#">
                                                 <img src="{{url + 'get-image-user/' +user.image }}" *ngIf="user.image">

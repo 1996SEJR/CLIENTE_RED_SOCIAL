@@ -108,11 +108,17 @@ export class UserService{
     }
 
     //OBTENER TODOS LOS USUARIOS
-    getUsers(page=null):Observable<any>{ 
+    getUsers(page=null, search=null):Observable<any>{ 
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                         .set('Authorization', this.getToken());
 
-        return this._http.get(this.url+'users/' + page , {headers: headers});
+        if(search == null || search == ''){
+            //console.log('if')
+            return this._http.get(this.url+'users/' + page , {headers: headers});
+        }else{
+            return this._http.get(this.url+'users-search/' + search + '/' + page , {headers: headers});
+        }
+        
     }
 
     //OBTENER UN USUARIO

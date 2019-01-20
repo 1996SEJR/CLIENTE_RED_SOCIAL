@@ -76,18 +76,24 @@
             <p>
                 <label>¿Qué estas pensando hoy?</label>
                 <textarea name="text" #texto="ngModel" [(ngModel)]="publication.text" class="form-control" required></textarea>
+                <!--
                 <span *ngIf="!texto.valid && texto.touched" class="text-danger">
                     El texto de la publicación es obligatorio
                 </span>
+                -->
+                
             </p>
 
             <p>
                 <label>Sube alguna imagen</label>
-                <input type="file" placeholder="Subir imagen" (change)="fileChangeEvent($event)">
+                <input type="file" (change)="fileChangeEvent($event)" >
             </p>
 
             <!-- LANZAR EVENTO sendPublication video 113 -->
-            <input type="submit" value="Enviar" class="btn btn-success" [disabled]="!newPublicationForm.form.valid">
+            <!--
+            <input type="submit" value="Enviar" class="btn btn-success" [disabled]="!newPublicationForm.form.valid">                
+            -->
+            <input type="submit" value="Enviar" class="btn btn-success" [disabled]="!texto.valid && enviar_publicacion == false ">
         </form>
     </div>   
     

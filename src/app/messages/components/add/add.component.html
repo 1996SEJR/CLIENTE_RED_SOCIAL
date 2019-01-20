@@ -1,5 +1,7 @@
-<div class="col-lg-10">
-    <h3>{{title}}</h3>
+<div class="col-lg-12">
+    <div class="form-actions">
+        <h3>{{title}}</h3>
+    </div>
     
     <div class="alert alert-success" *ngIf="status == 'success'">
         Has enviado el mensaje correctamente, míralo en <a [routerLink] = "['/mensajes/enviados']" > tus mensajes enviados</a>
@@ -25,9 +27,14 @@
             <label>Mensaje</label>
             <textarea name="text" #text="ngModel" [(ngModel)]="message.text" class="form-control" required></textarea>
             <span *ngIf="!text.valid && text.touched">
-                El mensaje es obligatorio
+                <p class="text-danger">
+                    <strong> El mensaje es obligatorio </strong>
+                </p>
             </span>
         </p>
-        <input type="submit" value="{{title}}" class="btn btn-success">
+
+        <div class="form-actions">
+            <input type="submit" value="{{title}}" class="btn btn-success" [disabled]="!formAdd.form.valid">
+        </div>
     </form>
 </div>
