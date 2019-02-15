@@ -1,129 +1,144 @@
 <!--evento sended video 113-->
-<div class="">
-    <div class="">
-            
-        <sidebar (sended)="refreshPublications($event)" [stats]="stats"></sidebar>
+<sidebar (sended)="refreshPublications($event)" [stats]="stats"></sidebar>
 
-        <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
-            <h1 class="h1-strong">
-                <button class="btn btn-default btn-sm" style="width: 100%" (click)="refreshPublications($event) ">Nuevas publicaciones</button>
-            </h1>
-            
-            <div id="publication">
-                <div *ngFor="let publication of publications" class="item-publication">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-            
-                            <div class="image-user pull-left">
-                                <a href="#">
-                                    <img src="{{url + 'get-image-user/' + publication.user.image }}" *ngIf="publication.user.image">
-                                    <img src="assets/user.png" class="avatar-default" *ngIf="!publication.user.image">
-                                </a>
-                            </div>
-                                
-                            <div>
-                                <a [routerLink]="['/perfil', publication.user._id]" class="user-name">
-                                    <strong>
-                                        {{publication.user.name}} {{publication.user.username}}
-                                    </strong>
-                                </a>
-                                &nbsp; . &nbsp;
-                                <span class="date">
-                                    {{ (publication.created_at | amFromUnix) | amLocale: "es" | amTimeAgo }}
-                                </span>
+<div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+    <h1 class="h1-strong">
+        <button class="btn btn-default btn-sm" style="width: 100%" (click)="refreshPublications($event) ">
+            <span class="glyphicon glyphicon-refresh"></span>
+            Nuevas publicaciones
+        </button>
+    </h1>
+    
+    <div id="publication">
+        <div *ngFor="let publication of publications; let indice=index" class="item-publication">
+            <div class="panel panel-default">
+                <div class="panel-body">
+    
+                    <div class="image-user pull-left">
+                        <a [routerLink]="['/perfil', publication.user._id]">
+                            <img src="{{url + 'get-image-user/' + publication.user.image }}" class="avatar-default"  *ngIf="publication.user.image">
+                            <img src="assets/user.png" class="avatar-default" *ngIf="!publication.user.image">
+                        </a>
+                    </div>
+                        
+                    <div>
+                        <a [routerLink]="['/perfil', publication.user._id]" class="user-name">
+                            <strong>
+                                {{publication.user.name}} {{publication.user.username}}
+                            </strong>
+                        </a>
+                        &nbsp;  &nbsp;
+                        <span class="date">
+                            <i class="glyphicon glyphicon-dashboard"></i>
+                            {{ (publication.created_at | amFromUnix) | amLocale: "es" | amTimeAgo }}
+                        </span>
 
-                                <div class="pull-right" *ngIf="publication.user._id == identity._id">
+                        <div class="pull-right" *ngIf="publication.user._id == identity._id">
 
-                                    <!-- Button HTML (to Trigger Modal) -->
-                                    <a href="#myModal_{{publication._id}}" role="button" class="btn" title="ELIMINAR" data-toggle="modal" *ngIf="showImage != publication._id">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </a>
-                                    
-                                    <!-- Modal HTML -->
-                                    <div id="myModal_{{publication._id}}" class="modal fade">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                    <h4 class="modal-title">Confirmación</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>
-                                                        ¿Desea eliminar la publicación?
-                                                        <strong>{{publication.text}}</strong>
-                                                    </p>
-                                                    <p class="text-warning"><small>No se podrá eliminar la publicación una vez que ha sido eliminada</small></p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deletePublication(publication._id)">Eliminar</button>
-                                                </div>
-                                            </div>
+                            <!-- Button HTML (to Trigger Modal) -->
+                            <a href="#myModal_{{publication._id}}" role="button" class="btn" title="ELIMINAR" data-toggle="modal" *ngIf="showImage != publication._id">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                            
+                            <!-- Modal HTML -->
+                            <div id="myModal_{{publication._id}}" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title">Confirmación</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                ¿Desea eliminar la publicación?
+                                                <strong>{{publication.text}}</strong>
+                                            </p>
+                                            <p class="text-warning"><small>No se podrá recuperar la publicación una vez que ha sido eliminada</small></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deletePublication(publication._id)">Eliminar</button>
                                         </div>
                                     </div>
-
-                                </div>    
-                            </div>
-                            
-                            <div class="publication-text" >
-                                <h4>{{publication.text}} </h4>
-                                <br>
-                            </div>
-
-                            <div class="publication-text" *ngIf="publication.text == ''">
-                                <br>
-                            </div>
-
-                            
-                            <!--video 125 botones para mostrar las imagenes -->
-                            <div class="contenedor">
-                                <div class="col-6 contenido" *ngIf="publication.file != 'null'">    
-                                    <img src="{{ url + 'get-image-pub/' + publication.file }}" class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 </div>
                             </div>
 
-                            <div class="">
-                                <div class="text-center">
-                                    <a class="btn" 
-                                    *ngIf="estadisticas_likes && estadisticas_likes.indexOf(publication._id) < 0"
-                                    (click)="likePublication(publication._id)" >           
-                                        <span class="glyphicon glyphicon-heart"> </span> Me gusta {{publication.number_likes}}
-                                    </a>
-    
-                                    <a class="btn" 
-                                    *ngIf="estadisticas_likes && estadisticas_likes.indexOf(publication._id) >= 0"
-                                    (click)="unlikePublication(publication._id)" >
-                                        <span class="glyphicon glyphicon-heart"></span>
-                                        <b> Te gusta </b> {{publication.number_likes}}
-                                    </a>
-                                </div> 
-                                <hr>
-                                
-                            </div>
+                        </div>    
+                    </div>
+                    
+                    <div class="publication-text" >
+                        <h4>{{publication.text}} </h4>
+                        <br>
+                    </div>
 
-                           
-                            <div class="image-user2 pull-left">
-                                <img src="{{url + 'get-image-user/' + identity.image }}" *ngIf="identity.image">
-                                <img src="assets/user.png" class="avatar-default" *ngIf="!identity.image">
-                            </div>
-                            <div class="col-12">
-                                <input type="text" class="form-control" style="width: 80%" placeholder="Escribe un comentario">
+                    <div class="publication-text" *ngIf="publication.text == ''">
+                        <br>
+                    </div>
 
-                            </div>
-                            
+                    
+                    <!--video 125 botones para mostrar las imagenes -->
+                    <div class="contenedor">
+                        <div class="contenido" *ngIf="publication.file != 'null'" style="margin: 10px 30px 10px 30px;">    
+                            <img src="{{ url + 'get-image-pub/' + publication.file }}" class="img-responsive">
                         </div>
                     </div>
+
+                    
+                    <div class="text-center">
+                        <a class="btn" 
+                        *ngIf="estadisticas_likes && estadisticas_likes.indexOf(publication._id) < 0"
+                        (click)="likePublication(publication._id)" >           
+                            <span class="glyphicon glyphicon-heart"> </span> Me gusta {{publication.number_likes}}
+                        </a>
+
+                        <a class="btn" 
+                        *ngIf="estadisticas_likes && estadisticas_likes.indexOf(publication._id) >= 0"
+                        (click)="unlikePublication(publication._id)" >
+                            <span class="glyphicon glyphicon-heart"></span>
+                            <b> Te gusta </b> {{publication.number_likes}}
+                        </a>
+
+                        <a class="btn" 
+                        (click)="getComments(publication._id)" >
+                            Ver comentarios
+                        </a>
+                    </div> 
+                    
+                    <hr>
+                    
+                    <div style="text-align: center;" *ngIf="listaDeComentarios && listaDeComentarios.length>0 && publicacionActual == publication._id"> 
+                        <div *ngFor="let comentario of listaDeComentarios;">
+                            <img src="{{url + 'get-image-user/' + comentario.user.image }}" *ngIf="comentario.user.image"  class="image-user2 ">
+                            <img src="assets/user.png" class="avatar-default" *ngIf="!comentario.user.image" class="image-user2 ">
+                            <input type="text" class="propiedades_input ancho" value="{{comentario.text}}       {{ (comentario.created_at | amFromUnix) | amLocale: 'es' | amTimeAgo }}" disabled style="background-color: rgba(240, 240, 240, 1);">
+                        </div>
+                    </div>
+                
+                    <hr *ngIf="listaDeComentarios && listaDeComentarios.length>0 && publicacionActual == publication._id">
+
+                    <form  #newCommentForm="ngForm" (ngSubmit)="commentsPublication(newCommentForm, publication._id)"> 
+                        <div style="text-align: center;"> 
+                            <img src="{{url + 'get-image-user/' + identity.image }}" *ngIf="identity.image"  class="image-user2 ">
+                            <img src="assets/user.png" class="avatar-default" *ngIf="!identity.image" class="image-user2 ">
+                            <input type="text" class="propiedades_input ancho" placeholder="Escribe un comentario" name="comentario" #comentario="ngModel" [(ngModel)]="commentary.text" >
+                            <span *ngIf="!comentario.valid && comentario.touched" >
+                                <p class="text-danger">
+                                    <strong>Escribe un comentario...</strong>
+                                </p>
+                            </span>
+                        </div>
+                    </form>                    
                 </div>
             </div>
-            
-            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center" *ngIf="publications && publications.length">
-                <p>
-                    <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
-                        Ver más publicaciones
-                    </button>
-                </p>
-            </div>
         </div>
-        <div class="clearfix"> </div>
+    </div>
+
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center" *ngIf="publications && publications.length">
+        <p>
+            <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+                Ver más publicaciones
+            </button>
+        </p>
     </div>
 </div>
+<div class="clearfix"> </div>

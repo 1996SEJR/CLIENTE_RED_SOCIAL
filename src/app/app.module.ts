@@ -9,13 +9,15 @@ import { HttpClientModule } from "@angular/common/http";
 
 //modulo de mensajes (modulo personalizado)
 import { MessagesModule } from './messages/messages.module';
-import { MarketplaceModule } from './marketplace/marketplace.module';
-
+//import { MarketplaceModule } from './marketplace/marketplace.module';
 
 //cargar componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { RecuperarCuentaComponent } from './components/recuperar-cuenta/recuperar-cuenta.component';
+import { RestablecerCuentaComponent } from './components/restablecer-cuenta/restablecer-cuenta.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { UsersComponent } from './components/users/users.component';
@@ -37,6 +39,9 @@ import { UserGuard } from './services/user.guard';
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    RecuperarCuentaComponent,
+    RestablecerCuentaComponent,
+    ChangePasswordComponent,
     HomeComponent,
     UserEditComponent,
     UsersComponent,
@@ -55,7 +60,7 @@ import { UserGuard } from './services/user.guard';
     HttpClientModule,
     MomentModule,
     MessagesModule,
-    MarketplaceModule
+    //MarketplaceModule
   ],
   providers: [
     appRoutingProviders,

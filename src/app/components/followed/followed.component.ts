@@ -10,6 +10,7 @@ import { GLOBAL } from '../../services/global';
     //metadatos (características)
     selector: 'followed',
     templateUrl: './followed.component.html',
+    styleUrls: ['../timeline/timeline.component.css'],
     providers: [UserService, FollowService] //cargar los servicios 
 })
 

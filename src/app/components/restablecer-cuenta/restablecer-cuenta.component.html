@@ -1,0 +1,40 @@
+
+<div class="login-page">
+    <div class="form">
+        <h1 class="h1-strong form-actions">{{title}}</h1>
+
+        <div class="alert alert-success alert-dismissible" *ngIf="status == 'success'">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p>Tu contraseña ha sido restablecida con éxito</p>
+                Pulsa <a [routerLink] = "['/login']" >aquí</a> para iniciar sesión
+        </div>
+
+        <div class="alert alert-danger alert-dismissible" *ngIf="status == 'danger'">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            No se ha podido enviar restablecer tu contraseña, inténtalo otra vez.
+        </div>
+
+        <div class="alert alert-danger alert-dismissible" *ngIf="status == 'token'">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Este enlace ya fue utilizado!!!
+        </div>
+        
+        <form  #recuperarClaveForm="ngForm" (ngSubmit)="onSubmit(recuperarClaveForm)">                
+            <input type="text" name="correo" #correo="ngModel" [(ngModel)]="user.email" required placeholder="Email">
+            <span *ngIf="!correo.valid && correo.touched" >
+                <p class="text-danger">
+                    <strong> Ingrese su correo electrónico </strong>
+                </p>
+            </span>
+
+            <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" required placeholder="Password">
+            <span *ngIf="!password.valid && password.touched" >
+                <p class="text-danger">
+                    <strong> La contraseña es obligatorio</strong>
+                </p>
+            </span>
+
+            <button type="submit">{{title}}</button>
+        </form>
+    </div>
+</div>

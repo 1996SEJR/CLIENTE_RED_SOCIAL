@@ -4,15 +4,16 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
 
-      <div class="navbar-header">
+         <div class="navbar-header">
         <a [routerLink]="['/home']" [routerLinkActive]="['active']" class="navbar-brand">{{title}}</a>
       </div>
 
+     
       <ul class="nav navbar-nav" *ngIf="identity">
         <li>
           <a [routerLink]="['/timeline']" [routerLinkActive]="['active']">
             <span class="glyphicon glyphicon-home"></span>
-            Timeline
+            Publicaciones
           </a>
         </li>
 
@@ -25,17 +26,25 @@
 
         <li>
           <a [routerLink]="['/mensajes']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-envelope"></span>
-            Mensajes
+            <span class="glyphicon glyphicon-envelope"></span> 
+            
+            <span class="count-symbol bg-warning" *ngIf="messagesNoViewed>0"></span>
+            <!--
+              <span class="count " *ngIf="messagesNoViewed>0">  {{ messagesNoViewed }}</span>
+            -->
+            
           </a>
         </li> 
 
-        <li>
+        <!--
+          <li>
           <a [routerLink]="['/marketplace']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-envelope"></span>
+            <span class="glyphicon glyphicon-credit-card"></span>
             Marketplace
           </a>
-        </li> 
+        </li>
+        -->
+         
       </ul>
 
       <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
@@ -46,12 +55,15 @@
           </a>
         </li>
 
-        <li>
+        <!--
+          <li>
           <a [routerLink]="['/registro']" [routerLinkActive]="['active']" >
             <span class="glyphicon glyphicon-user"></span>
             Registro
           </a>
         </li>
+        -->
+        
       </ul>
 
       <ul class="nav navbar-nav navbar-right" *ngIf="identity">
@@ -73,22 +85,25 @@
             </li>
             <li>
               <a [routerLink]="['/mis-datos']">
-                  <span class="glyphicon glyphicon-cog"></span>                
+                <span class="glyphicon glyphicon-cog"></span>                
                 Mis Datos
               </a>
             </li>
             <li>
+              <a [routerLink]="['/cambiar_clave']">
+                <span class="glyphicon glyphicon-lock"></span>                
+                Cambiar clave
+              </a>
+              </li>
+            <li>
               <a class="pointer" (click)="logout()">
-                  <span class="glyphicon glyphicon-log-out"></span>                
+                <span class="glyphicon glyphicon-log-out"></span>                
                 Cerrar sesión
               </a>
             </li>
           </ul>
         </li>
       </ul>
-
-      
-
     </div>
   </nav>
 </div>

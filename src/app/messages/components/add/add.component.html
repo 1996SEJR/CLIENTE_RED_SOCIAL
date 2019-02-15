@@ -18,7 +18,7 @@
             <!--LISTADO DE SEGUIDORES-->
             <select *ngIf="follows" name="receiver" #receiver="ngModel" [(ngModel)]="message.receiver" class="form-control " data-live-search="true" title="Selecciona al receptor" required>
                 <option *ngFor="let follow of follows" value="{{follow.user._id}}">
-                    {{follow.user.name + ' ' + follow.user.username + '(' + follow.user.nick + ')'}}
+                    {{follow.user.name + ' ' + follow.user.username + ' (' + follow.user.nick + ')'}}
                 </option>
             </select>
         </p>
@@ -26,19 +26,16 @@
         <p>
             <label>Mensaje</label>
             <textarea name="text" #text="ngModel" [(ngModel)]="message.text" class="form-control" required></textarea>
-            <span *ngIf="!text.valid && text.touched">
+            <span *ngIf="!text.valid && text.touched" style="text-align: center;">
                 <p class="text-danger">
                     <strong> El mensaje es obligatorio </strong>
                 </p>
             </span>
         </p>
 
-        <div class="form-actions">
+        <div class="form-actions" style="text-align: center;">
             <input type="submit" value="{{title}}" class="btn btn-success" [disabled]="!formAdd.form.valid">
         </div>
     </form>
 </div>
 
-<script>
-    $('.selectpicker').selectpicker('refresh');
-</script>

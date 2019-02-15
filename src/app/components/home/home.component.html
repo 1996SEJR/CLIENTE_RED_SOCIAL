@@ -1,17 +1,8 @@
-<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 ">
+
+<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
     <div class="contenedor">
-        <div class="col-6 contenido" >   
-                        <div class="jumbotron">
-                            <h1>{{title}}</h1>
-                            <p>
-                                Disfruta de las publicaciones de tus amigos y comparte tu vida
-                            </p>    
-                            <p>
-                                <a [routerLink]="['/perfil/', identity._id] "  class="btn btn-success btn-lg" role="button">Mi perfil </a> 
-                                <a [routerLink]="['/timeline']" [routerLinkActive]="['active']" class="btn btn-primary btn-lg" role="button">Timeline </a> 
-                                <a [routerLink]="['/gente']" [routerLinkActive]="['active']" class="btn btn-default btn-lg" role="button">Gente </a> 
-                            </p>
-                        </div>
+        <div class="contenido" >   
+            <img src="assets/my_friends.png" class="img-responsive">
         </div>
     </div>
 </div>

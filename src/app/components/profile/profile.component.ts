@@ -10,6 +10,7 @@ import { GLOBAL } from '../../services/global';
     //metadatos (características)
     selector: 'profile',
     templateUrl: './profile.component.html',
+    styleUrls: ['../../app.component.css'],
     providers: [UserService, FollowService] //cargar los servicios 
 })
 
@@ -32,7 +33,7 @@ export class ProfileComponent implements OnInit {
         private _userService: UserService,
         private _followService: FollowService
     ){
-        this.title='Perfil';
+        this.title='PERFIL';
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.stats_user_login = this._userService.getStats(); //estadisticas del usuario logueado

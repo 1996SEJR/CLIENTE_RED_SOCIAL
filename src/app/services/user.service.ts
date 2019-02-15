@@ -38,7 +38,7 @@ export class UserService{
     signUp(user, gettoken=null): Observable<any>{
         if(gettoken != null){
             console.log('signUp -- gettoken');
-           user.gettoken = gettoken;
+            user.gettoken = gettoken;
         }
 
         let params = JSON.stringify(user); //convertir el objeto a un string
@@ -118,7 +118,6 @@ export class UserService{
         }else{
             return this._http.get(this.url+'users-search/' + search + '/' + page , {headers: headers});
         }
-        
     }
 
     //OBTENER UN USUARIO
@@ -127,5 +126,32 @@ export class UserService{
                                         .set('Authorization', this.getToken());
 
         return this._http.get(this.url+'user/' + id , {headers: headers});
+    }
+
+    //RESTABLECER CUENTA
+    sendEmailRecuperarCuenta(user):Observable<any>{
+        //let params = JSON.stringify(email);
+        //console.log(user)
+        let params = (user);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        return this._http.post(this.url+'recuperar_cuenta', params, {headers: headers});
+    }
+
+    restablecerCuenta(user, id):Observable<any>{
+        //let params = JSON.stringify(email);
+        //console.log(user)
+        let params = (user);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        return this._http.post(this.url+'restablecer_cuenta?' + id, params, {headers: headers});
+    }
+
+    cambiarClave(id, oldPassword, newPassword):Observable<any>{
+        //let params = JSON.stringify(email);
+        //console.log(user)
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        return this._http.post(this.url+'cambiar_clave/' + id + '/' + oldPassword + '/' +newPassword, {headers: headers});
     }
 }

@@ -11,6 +11,7 @@ import { GLOBAL } from '../../../services/global';
 @Component({
     selector: 'sended',
     templateUrl: './sended.component.html',
+    styleUrls: ['../../../components/timeline/timeline.component.css'],
     providers: [FollowService, MessageService]
 })
 

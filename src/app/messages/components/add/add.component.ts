@@ -23,6 +23,7 @@ export class AddComponent implements OnInit {
     public url: string;
     public status: string;
     public follows;
+    
 
     public constructor(
         private _route: ActivatedRoute,

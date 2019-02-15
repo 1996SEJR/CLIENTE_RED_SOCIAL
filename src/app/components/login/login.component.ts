@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 @Component({
     selector: 'login',
     templateUrl: './login.component.html',
+    styleUrls: ['../../app.component.css'],
     providers: [UserService] //cargar servicio
 })
 
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
         private _router: Router,
         private _userService: UserService
     ){
-        this.title='Identificate';
+        this.title='IDENTIFÍCATE';
         this.user = new User("", "", "", "", "", "", "ROLE_USER", "");         
     }
 

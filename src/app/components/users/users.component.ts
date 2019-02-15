@@ -10,6 +10,7 @@ import { Follow } from '../../modules/follow';
     //metadatos (características)
     selector: 'users',
     templateUrl: './users.component.html',
+    styleUrls: ['./users.component.css'],
     providers: [UserService, FollowService] //cargar los servicios 
 })
 

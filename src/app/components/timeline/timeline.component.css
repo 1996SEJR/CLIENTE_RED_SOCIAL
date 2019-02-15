@@ -1,0 +1,88 @@
+/*TIMELINE*/
+#publication{
+    min-height: 0px;
+}
+
+#publication .date{
+    color: gray;
+}
+
+
+#publication .publication-text h4{
+    font-size: 15px;
+}
+
+.item-user .image-user,
+.item-publication .image-user
+{
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.item-user .image-user img,
+.item-publication .image-user img{
+    width: 100%;
+}
+
+.item-user .image-user2,
+.item-publication .image-user2
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.item-user .image-user2 img,
+.item-publication .image-user2 img{
+    width: 100%;
+}
+
+.propiedades_input {
+    /*display: block;
+    width: 100%;*/
+    
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+/*ANCHO MAXIMO DE LA PANTALLA 768PX*/
+@media (max-width: 768px) {
+    .ancho {
+        width: 80% !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .ancho {
+        width: 90% !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .ancho {
+        width: 85% !important;
+    }
+}
+
+/*ANCHO IGUAL O SUPERIOR A 768PX*/
+@media (min-width: 768px) {
+    .ancho {
+        width: 80% !important;
+    }
+}
+
+

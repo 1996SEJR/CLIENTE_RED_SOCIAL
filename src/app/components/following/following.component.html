@@ -3,7 +3,12 @@
         <sidebar [stats]="stats"></sidebar>
 
         <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
-            <h1 class="h1-strong" *ngIf="user">{{title}} {{user.name}} {{user.username}}</h1>
+
+            <h4 *ngIf="user" style="text-align: center;">
+                <span class="label label-info" style="font-size: 14px;">
+                    {{title}} {{user.name}} {{user.username}}
+                </span> 
+            </h4>
 
             <div class="people" *ngIf="following">
 
@@ -13,8 +18,8 @@
                         <div class="panel-body">
 
                             <div class="image-user pull-left">
-                                <a href="#">
-                                    <img src="{{url + 'get-image-user/' +follow.followed.image }}" *ngIf="follow.followed.image">
+                                <a [routerLink]="['/perfil', follow.user._id]">
+                                    <img src="{{url + 'get-image-user/' +follow.followed.image }}" class="avatar-default" *ngIf="follow.followed.image">
                                     <img src="assets/user.png" class="avatar-default" *ngIf="!follow.followed.image">
                                 </a>
                             </div>

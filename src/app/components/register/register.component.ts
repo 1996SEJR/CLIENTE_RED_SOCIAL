@@ -6,6 +6,7 @@ import { UserService } from '../../services/user.service';
 @Component({
     selector: 'register',
     templateUrl: './register.component.html',
+    styleUrls: ['../../app.component.css'],
     providers: [UserService] //cargar los servicios 
 })
 
@@ -20,12 +21,13 @@ export class RegisterComponent implements OnInit {
         private _router: Router,
         private _userService: UserService
     ){
-        this.title = 'Regrístrate';
+        this.title = 'REGÍSTRATE';
         this.user = new User("", "", "", "", "", "", "ROLE_USER", "");
     }
 
     ngOnInit(){
         console.log('Componente de register cargado ...');
+        
     }
 
     onSubmit(form){

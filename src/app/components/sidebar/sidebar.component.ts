@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit {
         //console.log(this.stats);
         this.url = GLOBAL.url;
         this.enviar_publicacion = false;
-        this.publication = new Publication("", "", "", "", "", this.identity._id);
+        this.publication = new Publication("", "", "", "", "", "", this.identity._id);
 
     }
 

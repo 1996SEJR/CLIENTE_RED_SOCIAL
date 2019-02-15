@@ -1,0 +1,49 @@
+/*TIMELINE*/
+#publication{
+    min-height: 0px;
+}
+
+#publication .date{
+    color: gray;
+}
+
+
+#publication .publication-text h4{
+    font-size: 15px;
+}
+
+.item-user .image-user,
+.item-publication .image-user
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.item-user .image-user img,
+.item-publication .image-user img{
+    width: 100%;
+}
+
+.item-user .image-user2,
+.item-publication .image-user2
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.item-user .image-user2 img,
+.item-publication .image-user2 img{
+    width: 100%;
+}
+
+.nav>li>a {
+    position: initial;
+    display: block;
+    padding: 10px 15px;
+}

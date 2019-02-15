@@ -13,16 +13,18 @@ import { UserGuard } from '../services/user.guard';
 
 const messagesRoutes: Routes = [
     {
+        path: 'mensajes', component: MainComponent, canActivate:[UserGuard]
+        /*
         path: 'mensajes',
         component: MainComponent,
         children: [
-            { path: '', redirectTo: 'recibidos', pathMatch: 'full'},
-            { path: 'enviar', component: AddComponent, canActivate:[UserGuard]},
+            { path: '', redirectTo: 'enviar', pathMatch: 'full'},
+            { path: 'mensajes', component: MainComponent, canActivate:[UserGuard]},
             { path: 'recibidos', component: ReceivedComponent, canActivate:[UserGuard]},
             { path: 'recibidos/:page', component: ReceivedComponent, canActivate:[UserGuard]},
             { path: 'enviados', component: SendedComponent, canActivate:[UserGuard]},
             { path: 'enviados/:page', component: SendedComponent, canActivate:[UserGuard]}
-        ]
+        ]*/
     } 
 ];
 

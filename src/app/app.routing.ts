@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 //cargar componentes
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { RecuperarCuentaComponent } from './components/recuperar-cuenta/recuperar-cuenta.component';
+import { RestablecerCuentaComponent } from './components/restablecer-cuenta/restablecer-cuenta.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { UsersComponent } from './components/users/users.component';
@@ -22,6 +25,9 @@ const appRoutes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'login', component: LoginComponent},
     {path: 'registro', component: RegisterComponent},
+    {path: 'recuperar_cuenta', component: RecuperarCuentaComponent},
+    {path: 'restablecer_cuenta', component: RestablecerCuentaComponent},
+    {path: 'cambiar_clave', component: ChangePasswordComponent},
     {path: 'verify', component: ValidarEmailComponent},
     {path: 'mis-datos', component: UserEditComponent, canActivate:[UserGuard]},    
     {path: 'gente', component: UsersComponent, canActivate:[UserGuard]},        

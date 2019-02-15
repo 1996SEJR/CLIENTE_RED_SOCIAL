@@ -16,7 +16,7 @@
                     <img src="assets/user.png" *ngIf="!user.image">
                 </div>
     
-                <div class="user-name ">
+                <div class="user-name" >
     
                     <span class="name">{{user.name + ' ' + user.username }} </span>
                     <span class="nick">({{ user.nick }})</span>  
@@ -24,8 +24,6 @@
                         Te sigue
                     </span>
                     
-                    <br>
-
                     <div class="follow" *ngIf="identity._id != user._id ">
                         <button class="btn btn-success" style="text-align: left;" *ngIf="!following" (click)="followUser(user._id)">
                             <span class="glyphicon glyphicon-plus-sign"></span>
@@ -57,8 +55,19 @@
     
                     <div class="stats " *ngIf="stats">
                         <div class="following-data">
+                            <a [routerLink]="['/perfil', user._id]">
+                                <span class="label label-default" >
+                                    Publicaciones
+                                </span>
+                                <span class="number-stats">
+                                    {{stats.publications}}
+                                </span>
+                            </a>
+                        </div>
+                        
+                        <div class="following-data">
                             <a [routerLink]="['/siguiendo', user._id, 1]">
-                                <span class="label-stats">
+                                <span class="label label-info">
                                     Siguiendo
                                 </span>
                                 <span class="number-stats">
@@ -69,7 +78,7 @@
                 
                         <div class="following-data">
                             <a [routerLink]="['/seguidores', user._id, 1]">
-                                <span class="label-stats">
+                                <span class="label label-warning">
                                     Seguidores
                                 </span>
                                 <span class="number-stats">
@@ -77,24 +86,14 @@
                                 </span>
                             </a>
                         </div>
-                
-                        <div class="following-data">
-                            <a [routerLink]="['/perfil', user._id]">
-                                <span class="label-stats">
-                                    Publicaciones
-                                </span>
-                                <span class="number-stats">
-                                    {{stats.publications}}
-                                </span>
-                            </a>
-                        </div>
                     </div>
                 </div>
+
                 <br>
                 <br>
                 <br>
                 <br>
-                <br>
+                
                 <div class="col-12 publications" *ngIf="user">
                     <publications [user]="user._id"></publications>
                 </div>

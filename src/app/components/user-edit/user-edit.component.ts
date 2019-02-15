@@ -8,6 +8,7 @@ import { GLOBAL } from '../../services/global';
 @Component({
     selector: 'user-edit',
     templateUrl: './user-edit.component.html',
+    styleUrls: ['../../app.component.css'],
     providers: [UserService, UploadService] //cargar los servicios 
 })
 
@@ -25,7 +26,7 @@ export class UserEditComponent implements OnInit {
         private _userService: UserService,
         private _uploadService: UploadService
     ){
-        this.title = 'Actualizar mis datos';
+        this.title = 'MIS DATOS';
         this.user = this._userService.getIdentity();
         this.identity = this.user;
         this.token = this._userService.getToken();

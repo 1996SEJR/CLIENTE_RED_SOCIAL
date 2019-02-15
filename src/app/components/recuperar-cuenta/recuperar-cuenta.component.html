@@ -1,0 +1,27 @@
+
+<div class="login-page">
+    <div class="form">
+        <h1 class="h1-strong form-actions">{{title}}</h1>
+
+        <div class="alert alert-success alert-dismissible" *ngIf="status == 'success'">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Revice tu correo electrónico, se te ha enviado un enlace para restablecer su contraseña!
+        </div>
+
+        <div class="alert alert-danger alert-dismissible" *ngIf="status == 'danger'">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            No se ha podido enviar un enlace a tu correo, inténtalo otra vez.
+        </div>
+        
+        <form  #recuperarClaveForm="ngForm" (ngSubmit)="onSubmit(recuperarClaveForm)">                
+            <input type="text" name="correo" #correo="ngModel" [(ngModel)]="user.email" required placeholder="Email">
+            <span *ngIf="!correo.valid && correo.touched" >
+                <p class="text-danger">
+                    <strong> Ingrese su correo electrónico </strong>
+                </p>
+            </span>
+
+            <button type="submit">{{title}}</button>
+        </form>
+    </div>
+</div>

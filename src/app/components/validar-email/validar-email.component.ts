@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 @Component({
     selector: 'validar-email',
     templateUrl: './validar-email.component.html',
+    styleUrls: ['../../app.component.css'],
     providers: [UserService] //cargar servicio
 })
 

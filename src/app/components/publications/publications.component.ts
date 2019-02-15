@@ -12,6 +12,7 @@ import * as $ from 'jquery';
     //metadatos (características)
     selector: 'publications',
     templateUrl: './publications.component.html',
+    styleUrls: ['../timeline/timeline.component.css'],
     providers: [UserService, PublicationService, LikeService] //cargar los servicios 
 })
 

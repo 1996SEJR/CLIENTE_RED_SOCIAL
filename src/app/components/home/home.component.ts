@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
     public constructor(
         private _userService: UserService
     ){
-        this.title = 'Bienvenido a UTMACH-SN';
         this.identity = this._userService.getIdentity();
         console.log(this.identity)
     }
